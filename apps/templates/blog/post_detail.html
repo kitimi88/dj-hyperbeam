@@ -1,0 +1,68 @@
+{% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}{{ post.title }} {% endblock title %}
+{% block content %}
+<section class="py-3">
+    <div class="container px-1 mb-5">
+        <div class="row gx-5">
+            <div class="col-lg-3">
+                <div class="d-flex align-items-center mt-3 mb-3">
+                    {% if post.author.profile.avatar %}
+                    <img class="rounded-circle" src="{{ post.author.profile.avatar.url }}" alt="" height="50"
+                        width="50">
+                    {% else %}
+                    <img class="rounded-circle" src="{% static 'assets/defaults/default_avatar.png' %}" alt=""
+                        height="50" width="50">
+                    {% endif %}
+                    <div class="ms-3">
+                        <div class="fw-bold"><a href="{% url 'users:profile-page' post.author %}"
+                            class="text-decoration-none link-dark">{{ post.author.first_name }} {{ post.author.last_name }}</a></div>
+                        <div class="text-muted fs-6"><small>Author</small></div>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <article>
+                    <header class="mb-3">
+                        <p class="fs-3 fw-bold mb-0">{{ post.title }}</p>
+                        <div class="text-muted fs-6 mb-2 mt-0">
+                            <small>
+                                Published: &nbsp;{{ post.publish | naturalday | capfirst }} 
+                                &nbsp;&nbsp;|&nbsp;&nbsp;
+                                Updated: &nbsp;{{ post.updated | naturalday | capfirst }}
+                            </small>
+
+                        </div>
+                    </header>
+                    <figure class="mb-3">
+                        {% if post.image %}
+                        <img class="img-fluid rounded" src="{{ post.image.url }}" alt="" style="max-width: 900px;" >
+                        {% else %}
+                        <img class="img-fluid rounded" src="{% static 'assets/defaults/default_post.png' %}"  alt="" style="max-width: 900px;" >
+                        {% endif %}
+                    </figure>
+                    <section class="mb-3">
+                        <p class="fs-5 mb-4">{{ post.content | safe }}</p>
+                    </section>
+                </article>
+                <!-- TAGS -->
+                {% include 'blog/post_tags.html' %}
+                <!-- COMMENTS -->
+                <hr class="featurette-divider">
+                {% with comments.count as total_comments %}
+                <h5 class="bg-secondary p-2 text-light mb-3">
+                    {{ total_comments }} comment{{ total_comments|pluralize }}
+                </h5>
+                {% endwith %}
+                <!-- comment section -->
+                {% include 'blog/comments.html' %}
+                <!-- similar post section -->
+
+                {% include 'blog/similarpost.html' %}
+
+</section>
+{% endblock content %}

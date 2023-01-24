@@ -36,15 +36,20 @@ def post_list(request, tag_slug=None):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    
-   
+
+    context = {
+        'posts': posts,
+        'latest_posts': latest_posts,
+        'pages': page,
+        'tag': tag
+    }
         
-    return render(request,'blog/post_list.html',{'posts':posts,'latest_posts':latest_posts, page:'pages', 'tag':tag})
+    return render(request,'blog/post_list.html',context)
 
 
 
 def post_detail(request, post):
-    post=get_object_or_404(Post,slug=post,status='published')
+    post = get_object_or_404(Post,slug=post,status='published')
 
     comments = post.comments.filter(active=True)
     new_comment = None

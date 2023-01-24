@@ -1,0 +1,71 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block content %}
+<section>
+    <div class="card bg-light border-0">
+        {% for comment in comments %}
+        <div class="card-body">
+            <!-- Single comment-->
+            <div class="d-flex align-items-center mb-3">
+                <div class="ms-3">
+                    <div class="fw-bold">{{ comment.name }}
+                        <span class="text-muted"><small> -  {{ comment.whenposted }}</small></span></div>
+                    {{ comment.body|safe }}
+
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        No comments yet.
+        {% endfor %}
+</section>
+<br>
+<section>
+    <div>
+        <!-- comment form -->
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            Leave a comment
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-3 shadow">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title">Leave a comment</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form action="{{ post.get_absolute_url }}" method="POST">
+
+                            {% csrf_token %}
+
+                            {{ comment_form.as_p }}
+
+
+                            <span class="badge rounded-pill bg-warning text-dark me-auto">Note: <i
+                                    class="bi bi-exclamation-triangle-fill"></i></span>
+                            <small>
+                                You can view your comment(s) as soons as all review process are completed.
+                                Know more about our<a href="{% url 'tos:policy-list' %}" target="_blank" class="text-decoration-none">
+                                    comment policy.</a>
+                                
+                            </small>
+                            <br>
+                            <div class="modal-footer flex-nowrap p-0 mt-3">
+                                <button type="button"
+                                    class="btn btn-sm btn-link fs-6 text-decoration-none col-6 m-0 rounded-0  border-end"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit"
+                                    class="btn btn-sm btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"><strong>Proceed</strong></button>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+{% endblock content %}

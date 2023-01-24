@@ -28,6 +28,11 @@ sitemaps = {
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/',include('apps.blog.urls',namespace='blog')),
+    path('perspective/',include('apps.users.urls',namespace='users')),
+    path('users/', include('django.contrib.auth.urls')),
+    path('policy/',include('apps.tos.urls',namespace='tos')),
+    path('',include('apps.pages.urls',namespace='pages')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 if settings.DEBUG:
     urlpatterns +=  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,0 +1,14 @@
+{% load static %}
+{% load humanize %}
+{% block content %}
+<header class="mb-4 mt-3">
+    <strong>Tags:</strong> &nbsp;
+    {% for tag in post.tags.all %}
+    <a class="badge bg-light text-decoration-none link-dark" href="{% url 'blog:post_tag' tag.slug %}">
+        <i class="fas fa-hashtag"></i> {{ tag.name }}
+    </a>
+    {% if not forloop.last %} {% endif %}
+    {% endfor %}
+</header>
+{% endblock content %}
+

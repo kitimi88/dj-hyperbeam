@@ -8,13 +8,13 @@ class PostAdmin(admin.ModelAdmin):
     #     ('Author',{'fields':['author']}),
     #     ('Slug',{'fields':['slug']}),
     #     ('Image',{'fields':['image']}),
-    #     ('Body',{'fields':['body']}),
+    #     ('Content',{'fields':['content']}),
     #     ('Status',{'fields':['status']}),
     #     ('Tags',{'fields':['tags']}),
     # )
     list_display = ('title', 'author', 'publish', 'status','tag_list')
     list_filter = ('status', 'created', 'publish',  'author',)
-    search_fields = ('title', 'body')
+    search_fields = ('title', 'content')
     prepopulated_fields = {'slug': ('title',)}
     # raw_id_fields = ("author",)
     date_hierarchy = 'publish'

@@ -18,7 +18,7 @@ class Post(models.Model):
         ('published','Published'),
     )
 
-    title = models.CharField(max_length=100),
+    title = models.CharField(max_length=100,null=True,blank=True)
     slug = models.SlugField(max_length=250,unique_for_date='publish')
     image = models.ImageField(default='static/assets/defaults/default_post.png',upload_to='media/posts/images',blank=True)
     author = models.ForeignKey(User,on_delete=models.CASCADE,related_name='blog_posts')
@@ -27,6 +27,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=20,choices=STATUS_CHOICES,default='draft')
+    
     objects = models.Manager()
     published = PublishedManager()
     tags = TaggableManager(blank=True)
@@ -39,7 +40,7 @@ class Post(models.Model):
         return self.title
 
     
-    def get_abosolute_url(self):
+    def get_absolute_url(self):
         return reverse('blog:post-detail',args=[self.slug])
 
     def get_comments(self):

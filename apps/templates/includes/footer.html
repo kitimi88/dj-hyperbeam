@@ -1,0 +1,26 @@
+{% load static %}
+{% load django_bootstrap5 %}
+{% block content %}
+<section class="mt-5">
+    <footer class="bg-light shadow-rounded border-0 py-2 mt-5 fixed-bottom">
+        <div class="container px-0">
+            <div class="col-auto">
+    
+            <hr>
+            <div class="row align-items-center justify-content-between flex-column flex-sm-row ">
+                <div class="col-auto">
+                    <div class="small m-0 text-dark">kitimi &copy; {% now 'Y' %}</div>
+                </div>
+                <div class="col-auto">
+                    <a class="text-dark" href="https://github.com/superuser118" target="_blank"><i class="bi bi-github me-2 ms-2"></i></a>
+    
+                    <a class="text-dark" href="https://www.facebook.com/mkeithtan" target="_blank"><i class="bi bi-facebook me-2 ms-2"></i></a>
+                </div>
+            </div>
+          
+    
+        </div>
+    </footer>
+</section>
+
+{% endblock content %}

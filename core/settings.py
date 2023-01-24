@@ -25,7 +25,7 @@ SECRET_KEY = os.environ['APP_SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -46,8 +46,12 @@ INSTALLED_APPS = [
     #'bootstrap5',
     'ckeditor',
     'ckeditor_uploader',
-
+    'taggit',
+    'taggit_serializer',
     'apps.blog',
+    'apps.pages',
+    'apps.users',
+    'apps.tos',
 
     'django_cleanup',
 ]

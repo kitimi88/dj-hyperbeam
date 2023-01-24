@@ -1,0 +1,28 @@
+{% load static %}
+{% load humanize %}
+{% block content %}
+<section>
+    <h5 class="bg-light p-2 text-dark mb-3 mt-3">
+        Similar posts
+    </h5>
+    <div class="row">
+        <div class="container-lg">
+            {% for post in similar_posts %}
+            <div class="btn-group ms-2">
+                <div class="col-lg-9">
+                    <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                        <span>
+                            <a href="{{ post.get_absolute_url }}"
+                                class="badge rounded-pill bg-info text-decoration-none link-dark">{{ post.title }}</a>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            {% empty %}
+            No Similar posts yet.
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}
