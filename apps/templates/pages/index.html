@@ -115,64 +115,15 @@
     <div class="row gx-5">
         <div class="col-lg-8 col-xl-6">
             <div class="text-start">
-                <h2 class="fw-bolder fs-5 mb-4">Latest stories</h2>
+                <h2 class="fw-bolder fs-5">Latest stories</h2>
             </div>
         </div>
     </div>
- 
-    <div class="row gx-5">
-      {% for post in latest_posts %}
-      <div class="col-lg-4 mb-3">
-        <div class="card h-100 shadow border-0">
-        {% if post.image %}
-        <img class="card-img-top" src="{{ post.image.url }}" alt="" height="300" width="600">
-        {% else %}
-        <img class="card-img-top" src="#" alt=""
-            height="300">
-        {% endif %}
-       
-        <div class="card-body p-4">
-          <a href="{{ post.get_absolute_url }}" class="text-decoration-none link-dark stretched-link">
-            <h2 class="card-title mb-3 fw-bold">{{post.title}}</h2>
-          </a>
-        <p class="card-text mb-0">{{ post.content|safe|striptags|truncatechars:100}}</p>
-      </div>
-      <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-        <div class="d-flex align-items-end justify-content-between">
-            <div class="d-flex align-items-center">
-              {% if post.author.profile.avatar %}
-                <img class="rounded-circle me-3" src="{{ post.author.profile.avatar.url }}" height="40" width="40" alt="..." />
-                {% else %}
-                <img class="rounded-circle me-3" src="{% static 'assets/defaults/default_avatar.png' %}" height="40" width="40" alt="..." />
-                {% endif %}
-                <div class="small">
-                    <div class="fw-bold">{{ post.author.first_name }} {{ post.author.last_name }}</div>
-                    <div class="text-muted">{{post.whenpublished}}</div>
-                </div>
-            </div>
-        </div>
-    </div>
-      </div>
-    </div><!-- /.row -->
-    {% endfor %}
-    <div class="text-end mb-5 mb-xl-0">
-      <a class="text-decoration-none" href="{% url 'blog:post-list' %}">
-          More stories
-          <i class="bi bi-arrow-right"></i>
-      </a>
-  </div>
-    <!-- START THE FEATURETTES -->
-    <div class="container marketing">
-    <hr class="featurette-divider">
-    </div>
-    </div>
-  </div>
-
     
     <div class="album py-5">
       <div class="container">
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 gx-5">
           {% for post in latest_posts %}
           <div class="col">
             <div class="card shadow-sm">
@@ -181,14 +132,15 @@
               <div class="card-body">
                 <h4 class="card-title mb-3 fw-bold">{{post.title}}</h4>
                 <p class="card-text">{{ post.content|safe|striptags|truncatechars:100}}</p>
+                
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a href="{{post.get_absolute_url}}" class="btn btn-sm btn-outline-primary">
-                      Continue
+                    <a href="{{post.get_absolute_url}}" class="text-decoration-none stretched-link">
+                      Read article
                     </a>
                      
                   </div>
-                  <small class="text-muted">9 mins</small>
+                  <small class="text-muted">{{post.whenpublished}}</small>
                 </div>
               </div>
             
@@ -197,6 +149,12 @@
           </div>
           {% endfor %}
         </div>
+        <div class="text-end mt-5 mb-5 mb-xl-0">
+          <a class="text-decoration-none" href="{% url 'blog:post-list' %}">
+              More stories
+              <i class="bi bi-arrow-right"></i>
+          </a>
+      </div>
       </div>
     </div>
 {% endblock content %}

@@ -43,15 +43,16 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'crispy_forms',
     'django_bootstrap5',
-    #'bootstrap5',
     'ckeditor',
     'ckeditor_uploader',
     'taggit',
     'taggit_serializer',
+    
     'apps.blog',
     'apps.pages',
     'apps.users',
     'apps.tos',
+    'apps.contact',
 
     'django_cleanup',
 ]
@@ -171,7 +172,19 @@ STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SERVER_EMAIL = 'contact@djhyperbeam.com'
+DEFAULT_FROM_EMAIL = 'no-reply@djhyperbeam.com'
+EMAIL_SUBJECT_PREFIX = '[Django]'
+MANAGERS = (
+    ('Us'),
+)

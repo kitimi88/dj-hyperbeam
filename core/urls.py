@@ -31,6 +31,7 @@ urlpatterns = [
     path('perspective/',include('apps.users.urls',namespace='users')),
     path('users/', include('django.contrib.auth.urls')),
     path('policy/',include('apps.tos.urls',namespace='tos')),
+    path('contact-us/',include('apps.contact.urls',namespace='contact')),
     path('',include('apps.pages.urls',namespace='pages')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
