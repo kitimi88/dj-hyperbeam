@@ -1,0 +1,58 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}{% endblock title %}
+{% block content %}
+
+<section class="py-3">
+    <div class="container-lg px-1">
+        <div class="row gx-5">
+            <div class="col-lg-4">
+                <div class="d-flex align-items-center mt-3 mb-3">
+             
+                    <div class="ms-3">
+                        <div class="fs-3 fw-bold">{{ poll.title }}</div>
+                        <div class="text-muted fs-6"><small>{{ post.whenpublished }}</small></div>
+                        <div class="text-muted mb-0">
+                            <small>
+                                Published: {{ poll.publish | naturalday | capfirst}} &nbsp;|&nbsp;
+                                Updated: {{ poll.updated | naturalday | capfirst}}
+                            </small> 
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <article>
+
+                    <hr>
+                    <section class="mb-3">
+                        <p class="fs-5 mb-3">{{ poll.description | safe }}</p>
+                    </section>
+                </article>
+                <div class="form-check form-check-inline">
+                    <form action="{% url 'polls:vote' poll.id %}" method="POST">
+                    
+                        {% csrf_token %}
+                        {{vote_form.as_p}}
+                        {% for choice in poll.choice_set.all %}
+                     
+                        <input type="radio" class="form-check-input" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                        <label class="form-check-label" for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+                        
+                        <br>
+                        
+                        {% endfor %}
+                    
+                        <input type="submit" value="Vote" class="btn btn-primary mt-3">
+                        <a class="btn btn-warning mt-3" href="{% url 'polls:poll-list' %}" role="button">Cancel</a>
+                    
+                    </form>
+                </div>
+                <hr>
+              
+                <br>
+{% endblock content %}

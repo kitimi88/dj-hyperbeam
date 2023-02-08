@@ -124,7 +124,7 @@ class Comment(models.Model):
     def get_comments(self):
         return Comment.objects.filter(parent=self).filter(active=True)
 
-def whenposted(self):
+    def whenposted(self):
         now = timezone.now()
         diff = now - self.posted
         #seconds

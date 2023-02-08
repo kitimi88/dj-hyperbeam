@@ -1,0 +1,45 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}Polls{% endblock title %}
+{% block content %}
+<section class="py-5">
+    <div class="container px-5">
+        <div class="row gx-5">
+            <div class="col-xl-8">
+                <h2 class="fw-bolder fs-5 mb-4">Polls</h2>
+                {% for poll in polls %}
+                <div class="mb-4">
+                    <div class="small text-muted">{{ poll.publish | naturalday | capfirst }}</div>
+                    <a class="text-decoration-none" href="{% url 'polls:detail' poll.id %}"><h5>{{ poll.title }}</h5></a>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-xl-4">
+                <div class="card border-0 h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex h-100 align-items-center justify-content-center">
+                            <div class="text-center">
+                                <div class="h6 fw-bolder">Contact</div>
+                                <p class="text-muted mb-4">
+                                    For press inquiries, email us at
+                                    <br />
+                                    <a href="#!">press@domain.com</a>
+                                </p>
+                                <div class="h6 fw-bolder">Follow us</div>
+                                <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-twitter"></i></a>
+                                <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-facebook"></i></a>
+                                <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-linkedin"></i></a>
+                                <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

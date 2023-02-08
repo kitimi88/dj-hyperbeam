@@ -6,7 +6,7 @@
 {% block title %}{{ post.title }} {% endblock title %}
 {% block content %}
 <section class="py-3">
-    <div class="container px-1 mb-5">
+    <div class="container px-3 mb-5">
         <div class="row gx-5">
             <div class="col-lg-3">
                 <div class="d-flex align-items-center mt-3 mb-3">
@@ -18,10 +18,12 @@
                         height="50" width="50">
                     {% endif %}
                     <div class="ms-3">
-                        <div class="fw-bold"><a href="{% url 'users:profile-page' post.author %}"
-                            class="text-decoration-none link-dark">{{ post.author.first_name }} {{ post.author.last_name }}</a></div>
-                        <div class="text-muted fs-6"><small>Author</small></div>
-                       
+                        <div class="fw-bold">
+                            <a href="{% url 'users:profile-page' post.author %}"class="text-decoration-none link-dark">
+                            {{ post.author.first_name }} {{post.author.last_name }}</a>
+                        </div>
+                        <div class="fs-6"><small>Author</small></div>
+
                     </div>
                 </div>
             </div>
@@ -29,9 +31,9 @@
                 <article>
                     <header class="mb-3">
                         <p class="fs-3 fw-bold mb-0">{{ post.title }}</p>
-                        <div class="text-muted fs-6 mb-2 mt-0">
+                        <div class="fs-6 mb-2 mt-0">
                             <small>
-                                Published: &nbsp;{{ post.publish | naturalday | capfirst }} 
+                                Published: &nbsp;{{ post.publish | naturalday | capfirst }}
                                 &nbsp;&nbsp;|&nbsp;&nbsp;
                                 Updated: &nbsp;{{ post.updated | naturalday | capfirst }}
                             </small>
@@ -39,30 +41,24 @@
                         </div>
                     </header>
                     <figure class="mb-3">
-                        {% if post.image %}
-                        <img class="img-fluid rounded" src="{{ post.image.url }}" alt="" style="max-width: 900px;" >
-                        {% else %}
-                        <img class="img-fluid rounded" src="{% static 'assets/defaults/default_post.png' %}"  alt="" style="max-width: 900px;" >
-                        {% endif %}
+                        <img class="img-fluid rounded" src="{{ post.image.url }}" alt="">
+
                     </figure>
                     <section class="mb-3">
-                        <p class="fs-5 mb-4">{{ post.content | safe }}</p>
+                        <p class="fs-5">{{ post.content | safe }}</p>
                     </section>
                 </article>
-                <!-- TAGS -->
-                {% include 'blog/post_tags.html' %}
-                <!-- COMMENTS -->
-                <hr class="featurette-divider">
-                {% with comments.count as total_comments %}
-                <h5 class="bg-secondary p-2 text-light mb-3">
-                    {{ total_comments }} comment{{ total_comments|pluralize }}
-                </h5>
-                {% endwith %}
-                <!-- comment section -->
-                {% include 'blog/comments.html' %}
-                <!-- similar post section -->
 
-                {% include 'blog/similarpost.html' %}
+                <div>
+                    <article>
+                        {% include 'blog/post_tags.html' %}
+                        {% include 'blog/comments.html' %}
+                        {% include 'blog/similarpost.html' %}
+                    </article>
+                </div>
+            </div>
 
+        </div>
+    </div>
 </section>
 {% endblock content %}

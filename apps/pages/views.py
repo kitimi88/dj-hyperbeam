@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from apps.blog.models import Post
+from apps.polls.models import Poll
 from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 from taggit.models import Tag
 from django.db.models import Q
@@ -47,6 +48,29 @@ def post_list(request, tag_slug=None):
         'tag': tag
     }
         
+    return render(request,'pages/index.html',context)
+
+def poll_list(request):
+    polls = Poll.objects.all()
+    latest_polls = Poll.objects.order_by('-updated')[0:3]
+
+    query = request.GET.get('q')
+    if query:
+        polls = Poll.objects.filter(Q(title__icontains=query)).distinct()
+
+    paginator = Paginator(polls,6)
+    page = request.GET.get('page')
+    try:
+        polls = paginator.page(page)
+    except PageNotAnInteger:
+        polls = paginator.page(1)
+    except EmptyPage:
+        polls = paginator.page(paginator.num_pages)
+
+    context = {
+        'polls':polls,
+        'latest_polls':latest_polls
+    }
     return render(request,'pages/index.html',context)
 # @login_required(login_url="/login/")
 def pages(request):

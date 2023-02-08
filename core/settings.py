@@ -25,7 +25,7 @@ SECRET_KEY = os.environ['APP_SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','192.168.0.100:8989']
 
 
 # Application definition
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.tos',
     'apps.contact',
+    'apps.polls',
 
     'django_cleanup',
 ]

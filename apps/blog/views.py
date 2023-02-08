@@ -5,7 +5,7 @@ from .forms import CommentForm
 from taggit.models import Tag
 from django.db.models import Count
 from django.db.models import Q
-from django.views.generic import ListView, DetailView
+from django.views.generic import View, ListView, DetailView
 from django.contrib import messages
 from django.contrib.auth.models import User
 
@@ -14,6 +14,15 @@ from django.template import loader
 from django import template
 from django.urls import reverse
 
+
+# class SearchView(View):
+#     def get(self, request, *args, **kwargs):
+#         query = request.GET.get('q','')
+#         search_result = Post.objects.filter(Q(title__icontains=query)).all()
+#         context = {
+#             'search_result':search_result
+#         }
+#         return render(request,'blog/search.html',context=context)
 
 def post_list(request, tag_slug=None):
     posts = Post.published.all()
@@ -44,7 +53,7 @@ def post_list(request, tag_slug=None):
         'tag': tag
     }
         
-    return render(request,'blog/post_list.html',context)
+    return render(request,'blog/post_list.html',context=context)
 
 
 

@@ -4,23 +4,21 @@
 {% load humanize %}
 {% block title %}{{profile.first_name }} {{ profile.last_name }}{% endblock title %}
 {% block content %}
-<div class="container px-1">
-  <div class="row-md-6">
-    <div class="col-lg-12">
-      <div class="card mb-3 border-0 card h-100">
-        <div class="row g-0">
+<div class="container-lg py-3">
+  <!-- <div class="row-md-6">
+    <div class="col-lg">
+      <div class="card mb-3 border-0" style="max-width: 2000px;">
+        <div class="row g-3">
           <div class="col-md-3 mt-3">
             
 
-            <img src="{{ profile_details.avatar.url }}" class="img-fluid rounded float-start" height="100" width="400"  alt="...">
+            <img src="{{ profile_details.avatar.url }}" class="img-fluid rounded-start"alt="">
 
           </div>
-          <div class="col-lg-9 mt-1">
+          <div class="col-md-8 mt-auto">
             <div class="card-body mb-5">
-              <h3 class="card-title fw-bold">{{profile.first_name}} {{profile.last_name}}</h3>
               <h5 class="card-title">{{ profile_details.title }}</h5>
-              
-              <br>
+              <h3 class="card-title fw-bold">{{profile.first_name}} {{profile.last_name}}</h3>
               
               <p class="card-text">{{profile_details.bio}}</p>
               <p class="card-text"><small class="text-muted">
@@ -29,16 +27,35 @@
                 Last login:&nbsp;{{profile.last_login|naturalday|capfirst}} 
                 &nbsp;&nbsp;|&nbsp;
                 Employee No.:&nbsp;{{profile_details.user_id}}
-                
+        
               </small></p>
-
-              <hr>
+<hr>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
+<div class="col mb-3 border-0">
+
+  <div class="row g-3">
+    <div class="col-md-4">
+      <img src="{{ profile_details.avatar.url }}" class="card-img rounded-start" alt="" style="max-width: 540px;">
+    </div>
+    <div class="col-md-8">
+      <div>
+        <h5 class="card-body text-dark mb-3">{{ profile_details.title }}</h5>
+        <h3 class="card-title text-dark fw-bold mb-3">{{profile.first_name}} {{profile.last_name}}</h3>
+        <p class="card-text text-dark mb-3">{{profile_details.bio}}</p>
+        <p class="card-text"><small class="text-muted">Joined:&nbsp;{{profile.date_joined|naturalday|capfirst}} 
+          &nbsp;|&nbsp;
+          Last login:&nbsp;{{profile.last_login|naturalday|capfirst}} 
+          &nbsp;&nbsp;|&nbsp;
+          Employee No.:&nbsp;{{profile_details.user_id}}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}

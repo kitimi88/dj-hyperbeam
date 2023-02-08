@@ -17,8 +17,8 @@
                 <div class="card h-100">
                     <div class="card h-100 shadow border-0">
                         <div class="card-body">
-                            <h4 class="card-title fw-bold mb-2">{{ post.title }}</h4>
-                            <p class="card-text mb-0">{{ post.body|safe|striptags|truncatechars:100}}
+                            <h4 class="card-title text-dark fw-bold mb-2">{{ post.title }}</h4>
+                            <p class="card-text text-dark mb-0">{{ post.body|safe|striptags|truncatechars:100}}
                                 <a class="text-decoration-none stretched-link"
                                     href="{{ post.get_absolute_url }}">Continue</a>
                             </p>
