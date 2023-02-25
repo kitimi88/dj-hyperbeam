@@ -3,6 +3,7 @@
 {% load django_bootstrap5 %}
 {% load crispy_forms_tags %}
 {% load humanize %}
+{% load page_utils %}
 {% block title %}{% endblock title %}
 {% block content %}
 
@@ -43,7 +44,7 @@
                     </a>
                      
                   </div>
-                  <small class="text-muted">{{post.whenpublished}}</small>
+                  <small class="text-muted">{{post.content|readtime}}</small>
                 </div>
               </div>
             

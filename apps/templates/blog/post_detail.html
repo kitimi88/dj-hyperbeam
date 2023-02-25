@@ -3,6 +3,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load humanize %}
+{% load article_utils %}
 {% block title %}{{ post.title }} {% endblock title %}
 {% block content %}
 <section class="py-3">
@@ -36,6 +37,7 @@
                                 Published: &nbsp;{{ post.publish | naturalday | capfirst }}
                                 &nbsp;&nbsp;|&nbsp;&nbsp;
                                 Updated: &nbsp;{{ post.updated | naturalday | capfirst }}
+                                {{post.content|readtime}}
                             </small>
 
                         </div>

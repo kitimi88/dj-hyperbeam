@@ -22,10 +22,11 @@
           </div>
           <div class="col-md-8">
             <div class="card-body">
+            
               <h5 class="card-title text-dark fw-bold">
                 {{user.user.first_name}} {{user.user.last_name}}
               </h5>
-              <span class="card-text text-dark">{{user.bio|safe|linebreaks|truncatechars:75}}</span>
+              <span class="card-text text-dark">{{user.bio|safe|linebreaks|truncatechars:50}}</span>
               <p class="card-text"><small class="text-muted">READ MORE FROM</small>
                 <a href="{% url 'users:profile-page' user.user %}" class="text-decoration-none">
                   {{user.user.first_name|upper}}

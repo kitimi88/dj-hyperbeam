@@ -1,9 +1,9 @@
 from django.shortcuts import render,get_object_or_404, redirect
-from .models import Poll, Choice, Vote
+from apps.polls.models import Poll, Choice, Vote
 from django.views.generic import DetailView
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
-from .forms import ChoiceForm
+from apps.polls.forms import ChoiceForm
 from django.contrib import messages
 
 
@@ -62,6 +62,7 @@ def poll_vote(request, poll_id):
             vote.poll = poll
             vote.save()
             print(vote)
+            messages.success(request, 'Thanks for voting!',extra_tags='alert alert-success alert-dismissible fade show')
             return render(request, 'polls/poll_result.html', {'poll': poll})
     else:
         vote_form = ChoiceForm()

@@ -16,7 +16,7 @@ class Poll(models.Model):
     active = models.BooleanField(default=True)
 
     def user_can_vote(self):
-        user_votes = self.vote_set.all()
+        #user_votes = self.vote_set.all()
         qs = user_votes.filter(poll=self)
         if qs.exist():
             return False

@@ -3,23 +3,17 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load humanize %}
+{% load article_utils %}
 {% block title %}Blog{% endblock title %}
 {% block content %}
 <section class="px-3">
     <div class="album py-3">
         <div class="container px-3 mb-3">
-
-                <div>
-                    {% if tag %}
-                    <p class="lead">Articles tagged with {{ tag.name }}</p>
-                    {% endif %}
-                </div>
+            {% include 'includes/blog_tags.html' %}
             </div>
-  
-            <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+            <div class="row row-cols-1 row-cols-lg-4 g-4 mt-3">
                         {% for post in posts %}
-                        
-                        <div class="col-md-4 mb-3">
+                        <div class="col-lg-4 mb-3">
                             <div class="card shadow border-0">
                                 <div class="card h-100 border-0">
                                
@@ -29,7 +23,7 @@
 
                                 <div class="card-body">
                                     <h4 class="card-title text-dark fw-bold">{{ post.title }}</h4>
-                            
+                                    {{post.content|readtime}}
                                 <div class="mb-3">
                                     <p>
                                        <span class="text-dark fw-bold">{{ post.author.first_name }} {{ post.author.last_name }}</span> 
@@ -47,11 +41,11 @@
                         
                         {% endfor %}
                     </div>
-                
+      
             </div>
         </div>
     </div>
-    
+
 </section>
 {% include "includes/pagination.html" with page=posts %}
 {% endblock content %}

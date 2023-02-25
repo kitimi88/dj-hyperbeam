@@ -46,8 +46,9 @@
     </div>
     <div class="col-md-8">
       <div>
+   
+        <h3 class="card-title text-dark fw-bold mb-2">{{profile.first_name}} {{profile.last_name}}</h3>
         <h5 class="card-body text-dark mb-3">{{ profile_details.title }}</h5>
-        <h3 class="card-title text-dark fw-bold mb-3">{{profile.first_name}} {{profile.last_name}}</h3>
         <p class="card-text text-dark mb-3">{{profile_details.bio}}</p>
         <p class="card-text"><small class="text-muted">Joined:&nbsp;{{profile.date_joined|naturalday|capfirst}} 
           &nbsp;|&nbsp;
@@ -56,6 +57,7 @@
           Employee No.:&nbsp;{{profile_details.user_id}}</small></p>
       </div>
     </div>
+    <hr>
   </div>
 </div>
 {% endblock content %}

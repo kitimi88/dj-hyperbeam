@@ -10,7 +10,11 @@ register = template.Library()
 def total_polls():
     return Poll.objects.count()
 
-@register.inclusion_tag('polls/poll_detail.html')
+@register.inclusion_tag('polls/poll_list.html')
 def show_latest_polls(count=5):
     latest_polls = Poll.objects.order_by('-publish')[:count]
     return {'latest_polls':latest_polls}
+
+@register.filter(name='markdown')
+def markdown_format(text):
+    return mark_safe(markdown.markdown(text))
