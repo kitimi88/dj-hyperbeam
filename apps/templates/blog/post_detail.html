@@ -18,27 +18,22 @@
                     <img class="rounded-circle" src="{% static 'assets/defaults/default_avatar.png' %}" alt=""
                         height="50" width="50">
                     {% endif %}
-                    <div class="ms-3">
+                    <div class="ms-2">
                         <div class="fw-bold">
                             <a href="{% url 'users:profile-page' post.author %}"class="text-decoration-none link-dark">
                             {{ post.author.first_name }} {{post.author.last_name }}</a>
                         </div>
                         <div class="fs-6"><small>Author</small></div>
-
                     </div>
                 </div>
             </div>
             <div class="col-lg-8">
                 <article>
                     <header class="mb-3">
-                        <p class="fs-3 fw-bold mb-0">{{ post.title }}</p>
+               
+                        <span class="fs-3 fw-bold mb-0">{{ post.title }}</span>
                         <div class="fs-6 mb-2 mt-0">
-                            <small>
-                                Published: &nbsp;{{ post.publish | naturalday | capfirst }}
-                                &nbsp;&nbsp;|&nbsp;&nbsp;
-                                Updated: &nbsp;{{ post.updated | naturalday | capfirst }}
-                                {{post.content|readtime}}
-                            </small>
+                            <small>{{post.content|readtime}}</small>
 
                         </div>
                     </header>
@@ -48,7 +43,13 @@
                     </figure>
                     <section class="mb-3">
                         <p class="fs-5">{{ post.content | safe }}</p>
+                        <hr>
+
+                        <div class="fs-6"><small>Published: {{post.publish|naturalday|capfirst}}<i class="bi bi-dot"></i>Updated: {{post.updated|naturalday|capfirst}} </small></div>
+
+
                     </section>
+   
                 </article>
 
                 <div>

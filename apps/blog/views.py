@@ -15,14 +15,23 @@ from django import template
 from django.urls import reverse
 
 
-# class SearchView(View):
-#     def get(self, request, *args, **kwargs):
-#         query = request.GET.get('q','')
-#         search_result = Post.objects.filter(Q(title__icontains=query)).all()
-#         context = {
-#             'search_result':search_result
-#         }
-#         return render(request,'blog/search.html',context=context)
+# def featured_post(request):
+#     featured_post = Post.objects.filter(featured=True).first()
+    
+#     context = {
+#         'featured_post':featured_post
+#     }
+
+#     return render(request,'blog/post_list.html',context)
+def featured_post(request):
+    featured_post = Post.published.filter(featured=True).first()
+    
+    context = {
+        'featured_post':featured_post
+    }
+
+    return render(request,'blog/post_list.html',context)
+    
 
 def post_list(request, tag_slug=None):
     posts = Post.published.all()
