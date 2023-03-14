@@ -29,7 +29,8 @@ def featured_post(request):
 def post_list(request, tag_slug=None):
     posts = Post.published.all()
     #featured_post = Post.published.filter(featured=True).first()
-    latest_posts = Post.objects.order_by('-updated')
+    # latest_posts = Post.objects.order_by('-updated')
+    latest_posts = Post.published.filter().order_by('-publish')
     tag = None
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)

@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container">
     <div class="list-group w-auto">
-        {% for poll in latest_polls %}
+        {% for poll in polls %}
         <a href="{% url 'polls:detail' poll.id %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
             <img src="{% static 'assets/defaults/logo_blue.png' %}" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
             <div class="d-flex gap-2 w-100 justify-content-between">
@@ -21,5 +21,5 @@
         {% endfor %}
     </div>
 </div>
-{% include "includes/pagination.html" with page=polls %}
+{% include "includes/pagination.html" %}
 {% endblock content %}

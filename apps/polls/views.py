@@ -1,34 +1,46 @@
 from django.shortcuts import render,get_object_or_404, redirect
 from apps.polls.models import Poll, Choice, Vote
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 from apps.polls.forms import ChoiceForm
 from django.contrib import messages
 
+class AllPollsView(ListView):
+    model = Poll
+    template_name = 'polls/poll_list.html'
+    context_object_name = 'polls'
+    # paginate_by = 4
 
-def poll_list(request):
-    polls = Poll.objects.all()
-    latest_polls = Poll.objects.order_by('-publish')
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        polls = Poll.objects.all()
+        context['poll-list'] = polls
+        
+        return context
 
-    query = request.GET.get('q')
-    if query:
-        polls = Poll.objects.filter(Q(title__icontains=query)).distinct()
+# def poll_list(request):
+#     polls = Poll.objects.all()
+#     latest_polls = Poll.objects.order_by('-publish')
 
-    paginator = Paginator(polls,5)
-    page = request.GET.get('page')
-    try:
-        polls = paginator.page(page)
-    except PageNotAnInteger:
-        polls = paginator.page(1)
-    except EmptyPage:
-        polls = paginator.page(paginator.num_pages)
+#     query = request.GET.get('q')
+#     if query:
+#         polls = Poll.objects.filter(Q(title__icontains=query)).distinct()
 
-    context = {
-        'polls':polls,
-        'latest_polls':latest_polls
-    }
-    return render(request,'polls/poll_list.html',context)
+#     paginator = Paginator(polls,4)
+#     page = request.GET.get('page')
+#     try:
+#         polls = paginator.page(page)
+#     except PageNotAnInteger:
+#         polls = paginator.page(1)
+#     except EmptyPage:
+#         polls = paginator.page(paginator.num_pages)
+
+#     context = {
+#         'polls':polls,
+#         'latest_polls':latest_polls
+#     }
+#     return render(request,'polls/poll_list.html',context=context)
 
 
 

@@ -24,15 +24,20 @@
           &nbsp;&nbsp;|&nbsp;
           Employee No.:&nbsp;{{profile_details.user_id}}
           &nbsp;&nbsp;|&nbsp;
-          Posts:&nbsp;{{user_post.count}}</small></p>
-          
+          {% if not user_post %}
+          Published articles:&nbsp; {{profile.first_name}} is yet to post.
+          {% else %}
+          Published articles:&nbsp; {{user_post.count}}
+          {% endif %}
+          </small>
+        </p>
       </div>
     </div>
     <hr>
   </div>
   <section>
-    <div class="container px-1 mt-1">
-      <p class="lead bg-light p-2 mb-3 fs-5">All the latest by {{profile.first_name}}</p>
+    <div class="container-lg px-1 mt-1">
+      <p class="lead bg-success text-light p-2 mb-3 fs-5">Articles by {{profile.first_name}}</p>
       <div class="row row-cols-1 row-cols-md-3 g-3">
         {% for post in user_post %}
         <div class="col-lg-4 mb-3">
