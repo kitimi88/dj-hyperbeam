@@ -5,7 +5,7 @@ from .models import Post
 
 
 class LatestPostsFeed(Feed):
-    title = 'hyperbeam'
+    title = 'dj-hyperbeam'
     link = reverse_lazy('blog:post-list')
     description = 'Recent post'
 

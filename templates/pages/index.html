@@ -6,22 +6,23 @@
 {% load page_utils %}
 {% block title %}{% endblock title %}
 {% block content %}
-
-<div class="container-fluid">
-  <div class="text-center my-5">
-      <h1 class="fw-bolder">Django Hyperbeam</h1>
-      <p class="lead mb-0">A collection of Django applications for your next web project.</p>
+<header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+        <h1 class="fw-bolder">Django Hyperbeam</h1>
+        <p class="lead mb-0">A collection of Django applications for your next web project.</p>
+    </div>
   </div>
-</div>
+</header>
 
 
   <hr class="featurette-divider">
 
-  <div class="container px-3">
+  <div class="container-fluid px-3">
     <div class="row gx-5">
         <div class="col-lg-8 col-xl-6">
             <div class="text-start">
-                <h2 class="fw-clsolder fs-5">Latest stories</h2>
+                <h2 class="fw-bold">Latest stories</h2>
             </div>
         </div>
     </div>
@@ -68,7 +69,7 @@
       <div class="row gx-5">
           <div class="col-lg-8 col-xl-6">
               <div class="text-start">
-                  <h2 class="fw-clsolder fs-5">Polls</h2>
+                  <h2 class="fw-bold">Polls</h2>
               </div>
           </div>
       </div>
@@ -82,12 +83,12 @@
               <div class="card h-100 shadow border-0">
                 <div class="card-body">
                   <h4 class="card-title mb-3 fw-bold text-dark">{{poll.title}}</h4>
-
+                  <p class="card-text">{{poll.description|safe|striptags|truncatechars:100}}</p>
                   
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a href="{% url 'polls:detail' poll.id %}" class="text-decoration-none stretched-link">
-                        Read article
+                        Vote
                       </a>
                        
                     </div>
@@ -102,10 +103,12 @@
           </div>
           <div class="text-end mt-5 mb-5 mb-xl-0">
             <a class="text-decoration-none" href="{% url 'polls:poll-list' %}">
-                More
+                <p class="fw-bold">More topics
                 <i class="bi bi-arrow-right-circle-fill"></i>
+              </p>
             </a>
         </div>
         </div>
       </div>
+      <hr class="featurette-divider">
 {% endblock content %}

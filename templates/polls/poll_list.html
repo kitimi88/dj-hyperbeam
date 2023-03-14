@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}Polls{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="list-group w-auto">
+        {% for poll in latest_polls %}
+        <a href="{% url 'polls:detail' poll.id %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+            <img src="{% static 'assets/defaults/logo_blue.png' %}" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 class="mb-2 fw-bold">{{poll.title}}</h6>
+                    <p class="mb-0 opacity-75">{{poll.description|safe|striptags|truncatechars:100}}</p>
+                </div>
+                <small class="opacity-50 text-nowrap">{{poll.publish|naturalday|capfirst}}</small>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% include "includes/pagination.html" with page=polls %}
+{% endblock content %}

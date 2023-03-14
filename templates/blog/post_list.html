@@ -7,42 +7,27 @@
 {% block title %}Blog{% endblock title %}
 {% block content %}
 <section class="px-3">
-    <div class="container">
+    <div class="container-lg">
         <div class="row">
             <!-- Blog entries-->
-       
+          
             <div class="col-lg-8">
-                {% for post in posts %}
+                {% for post in latest_posts %}
                 <!-- Featured blog post-->
-                {% if featured_post %}
+            
                 <div class="card mb-4">
                     <a href="#!"><img class="card-img-top" src="{{post.image.url}}" alt="" /></a>
                     <div class="card-body">
                         <div class="small text-muted">{{post.whenpublished}}</div>
                         <h2 class="card-title">{{post.title}}</h2>
                         <p class="card-text">{{post.content|safe|striptags|truncatechars:100}}</p>
-                        <a class="btn btn-primary" href="#!">Read more →</a>
+                        <a class="btn btn-primary" href="{{post.get_absolute_url}}">Read more →</a>
                     </div>
                 </div>
-                {% endif %}
+
+      
                 <!-- Nested row for non-featured blog posts-->
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top" src="{{post.image.url}}" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">{{post.whenpublished}}</div>
-                                <h2 class="card-title h4">{{post.title}}</h2>
-                                <p class="card-text">{{post.content|safe|striptags|truncatechars:100}}</p>
-                                <a class="btn btn-primary" href="{{post.get_absolute_url}}">Read more →</a>
-                            </div>
-                        </div>
-                        <!-- Blog post-->
 
-                    </div>
-
-                </div>
                {% endfor %}
 
             </div>
@@ -52,10 +37,14 @@
                 <div class="card mb-4">
                     <div class="card-header">Search</div>
                     <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                        </div>
+                
+                        <form action="#" class="d-flex" method="get" role="search">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="q" placeholder="Search"
+                                    aria-describedby="button-search" />
+                                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- Categories widget-->

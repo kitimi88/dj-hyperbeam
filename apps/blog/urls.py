@@ -1,5 +1,6 @@
-from django.urls import path, re_path
-from . import views
+from django.urls import path
+# from . import views
+from apps.blog import views
 from . feeds import LatestPostsFeed
 
 

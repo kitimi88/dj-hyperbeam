@@ -9,13 +9,13 @@ from django.contrib import messages
 
 def poll_list(request):
     polls = Poll.objects.all()
-    latest_polls = Poll.objects.order_by('-updated')[0:3]
+    latest_polls = Poll.objects.order_by('-publish')
 
     query = request.GET.get('q')
     if query:
         polls = Poll.objects.filter(Q(title__icontains=query)).distinct()
 
-    paginator = Paginator(polls,6)
+    paginator = Paginator(polls,5)
     page = request.GET.get('page')
     try:
         polls = paginator.page(page)

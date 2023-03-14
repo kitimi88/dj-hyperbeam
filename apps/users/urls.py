@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import UserProfileView, UserProfileList
+from .views import AllUserProfile
 from . import views
 
 app_name = 'users'
 
 urlpatterns = [
-    path('',UserProfileList.as_view(),name='user-list'),
+    path('',AllUserProfile.as_view(),name='all-users'),
     path('<str:username>',views.MyProfile,name='profile-page'),
+    
 ]

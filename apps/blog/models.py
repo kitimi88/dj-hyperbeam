@@ -46,8 +46,7 @@ class Post(models.Model):
 
     def get_comments(self):
         return self.comments.filter(parent=None).filter(active=True)
-
-#TIMEFILTER
+        
     def whenpublished(self):
         now = timezone.now()
         diff = now - self.publish
@@ -103,7 +102,7 @@ class Post(models.Model):
                 return str() + ' about a year ago'
             else:
                 return str(years) + ' years ago'
-    
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
@@ -124,7 +123,7 @@ class Comment(models.Model):
 
     def get_comments(self):
         return Comment.objects.filter(parent=self).filter(active=True)
-
+    
     def whenposted(self):
         now = timezone.now()
         diff = now - self.posted
@@ -169,7 +168,7 @@ class Comment(models.Model):
         if diff.days >= 30 and diff.days < 365:
             months = math.floor(diff.days/30)
             if months == 1:
-                return str(months) + ' about a month ago'
+                return str() + ' about a month ago'
             else:
                 return str(months) +' months ago'
 
@@ -177,6 +176,7 @@ class Comment(models.Model):
         if diff.days >= 365:
             years = math.floor(diff.days/365)
             if years == 1:
-                return str(years) + ' about a year ago'
+                return str() + ' about a year ago'
             else:
                 return str(years) + ' years ago'  
+    

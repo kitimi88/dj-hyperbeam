@@ -15,27 +15,21 @@ from django import template
 from django.urls import reverse
 
 
-# def featured_post(request):
-#     featured_post = Post.objects.filter(featured=True).first()
-    
-#     context = {
-#         'featured_post':featured_post
-#     }
-
-#     return render(request,'blog/post_list.html',context)
 def featured_post(request):
-    featured_post = Post.published.filter(featured=True).first()
+    featured_post = Post.objects.filter(featured=True)[0:3]
     
     context = {
         'featured_post':featured_post
     }
 
-    return render(request,'blog/post_list.html',context)
+    # return render(request,'blog/post_list.html',context)
+    return render(request,'blog/blog_index.html',context=context)
     
 
 def post_list(request, tag_slug=None):
     posts = Post.published.all()
-    latest_posts = Post.objects.order_by('-updated')[0:3]
+    #featured_post = Post.published.filter(featured=True).first()
+    latest_posts = Post.objects.order_by('-updated')
     tag = None
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
@@ -43,7 +37,7 @@ def post_list(request, tag_slug=None):
 
     query = request.GET.get("q")
     if query:
-        posts=Post.published.filter(Q(title__icontains=query) | Q(tags__name__icontains=query)).distinct()
+        posts = Post.published.filter(Q(title__icontains=query) | Q(tags__name__icontains=query)).distinct()
             
     
     paginator = Paginator(posts,6)
@@ -58,11 +52,12 @@ def post_list(request, tag_slug=None):
     context = {
         'posts': posts,
         'latest_posts': latest_posts,
+        #'featured_post':featured_post,
         'pages': page,
         'tag': tag
     }
         
-    return render(request,'blog/post_list.html',context=context)
+    return render(request,'blog/blog_index.html',context=context)
 
 
 
