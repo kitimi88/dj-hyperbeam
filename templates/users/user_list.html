@@ -5,43 +5,40 @@
 {% load humanize %}
 {% block title %}Profile{% endblock title %}
 {% block content %}
-
-<div class="album py-3">
-  <div class="container-lg px-1">
-    <div class="row row-cols-1 row-cols-md-3 g-3 gx-3">
-    {% for user in profile %}
-    <div class="col">
-      <div class="card mb-3 border-0" style="max-width: 600px;">
-        <div class="row row-cols-3 g-1 gx-1">
-          <div class="col-md-4">
-            {% if user.user.profile.avatar %}
-            <img src="{{user.user.profile.avatar.url}}" class="card-img rounded-start" alt="...">
-            {% else %}
-            <img src="{% static 'assets/defaults/default_avatar.png' %}" class="img-fluid rounded-start" alt="...">
-            {% endif %}
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-            
-              <h5 class="card-title text-dark fw-bold">
-                {{user.user.first_name}} {{user.user.last_name}}
-              </h5>
-              <span class="card-text text-dark">{{user.bio|safe|linebreaks|truncatechars:50}}</span>
-              <p class="card-text"><small class="text-muted">READ MORE FROM</small>
-                <a href="{% url 'users:profile-page' user.user %}" class="text-decoration-none">
-                  {{user.user.first_name|upper}}
-                  <i class="bi bi-arrow-right-circle-fill"></i>
-                </a>
-              </p>
+<section>
+    <div class="container-lg px-3">
+      <div class="row row-cols-1 row-cols-md-3 g-0 gx-1">
+      {% for user in profile %}
+      <div class="col">
+        <div class="card mb-3 border-0" style="max-width: 400px;">
+          <div class="row row-cols-1 g-0">
+            <div class="col-md-4">
+              {% if user.user.profile.avatar %}
+              <img src="{{user.user.profile.avatar.url}}" class="card-img rounded-start" alt="...">
+              {% else %}
+              <img src="{% static 'assets/defaults/default_avatar.png' %}" class="card-img rounded-start" alt="...">
+              {% endif %}
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+              
+                <h5 class="card-title text-dark fw-bold">
+                  {{user.user.first_name}} {{user.user.last_name}}
+                </h5>
+                <span class="card-text text-dark">{{user.bio|safe|linebreaks|truncatechars:55}}</span>
+                <p class="card-text"><small class="text-muted">MORE FROM</small>
+                  <a href="{% url 'users:profile-page' user.user %}" class="text-decoration-none">
+                    {{user.user.first_name|upper}}
+                    <i class="bi bi-arrow-right-circle-fill"></i>
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-</div>
 
-
-
+</section>
 {% endblock content %}

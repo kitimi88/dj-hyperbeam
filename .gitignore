@@ -160,8 +160,6 @@ cython_debug/
 #.idea/
 images
 assets
-css
-js
 vendor
 migrations
 dummies
