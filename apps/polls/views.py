@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 from apps.polls.forms import ChoiceForm
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 class AllPollsView(ListView):
     model = Poll
@@ -84,22 +85,30 @@ def poll_vote(request, poll_id):
     
     return render(request, 'polls/poll_result.html', {'poll': poll,'vote_form':vote_form})
 
-# def poll_vote(request, poll_id):
+
+
+# def poll_vote(request,poll_id):
 #     poll = get_object_or_404(Poll, pk=poll_id)
 
-#     choice_id = request.POST.get('choice')
+#     if request.method == 'POST':
+#         check1 = False
+#         vote_form = ChoiceForm(request.POST)
 
-
-#     if choice_id:
-#         choice = Choice.objects.get(id=choice_id)
-#         vote = Vote( poll=poll, choice=choice)
-#         vote.save()
-#         print(vote)
-#         messages.success(request, 'Thanks for voting!',extra_tags='alert alert-success alert-dismissible fade show')
-#         return render(request, 'polls/poll_result.html', {'poll': poll})
-#     else:
-#         messages.error(
-#             request, "No choice selected!", extra_tags='alert alert-warning alert-dismissible fade show')
-#         return redirect("polls:detail", poll_id)
-#     return render(request, 'polls/poll_result.html', {'poll': poll})
-
+#         if vote_form.is_valid():
+#             email = vote_form.cleaned_data['email']
+        
+#         if User.objects.filter(email=email).exists():
+#             check1 = True
+#             messages.error(request='Opps. Seems that you\'ve already voted.',extra_tags='alert alert-warning alert-dismissable fade show')
+        
+#         if check1 == check1:
+#             return redirect('polls:detail',poll_id)
+        
+#         else:
+#             context = {
+#                 'poll':poll,
+#                 'vote_form':vote_form
+#             }
+#             messages.success(request, 'Thanks for voting!',extra_tags='alert alert-success alert-dismissible fade show')
+        
+#         return render(request,'polls/poll_result.html',context=context)

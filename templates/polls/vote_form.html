@@ -1,0 +1,26 @@
+{% load static %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}{% endblock title %}
+{% block content %}
+<div class="form-check form-check-inline">
+    <form action="{% url 'polls:vote' poll.id %}" method="POST">
+    
+        {% csrf_token %}
+        {{vote_form.as_p}}
+        {% for choice in poll.choice_set.all %}
+     
+        <input type="radio" class="form-check-input" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label class="form-check-label" for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+        
+        <br>
+        
+        {% endfor %}
+    
+        <input type="submit" value="Vote" class="btn btn-primary mt-3">
+        <a class="btn btn-warning mt-3" href="{% url 'polls:poll-list' %}" role="button">Cancel</a>
+    
+    </form>
+</div>
+{% endblock content %}

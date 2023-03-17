@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Comment
+from apps.blog.models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 from .forms import CommentForm
 from taggit.models import Tag
@@ -82,8 +82,15 @@ def post_detail(request, post):
     post_tags_ids = post.tags.values_list('id', flat=True)
     similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
     similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags','-publish')[:6]
+
+    context = {
+        'post': post,
+        'comments': comments,
+        'comment_form': comment_form,
+        'similar_posts':similar_posts
+    }
     
-    return render(request, 'blog/post_detail.html',{'post':post,'comments': comments,'comment_form':comment_form,'similar_posts':similar_posts})
+    return render(request, 'blog/post_detail.html',context=context)
 
 
     
@@ -111,3 +118,13 @@ def reply_page(request):
             return redirect(post_url+'#'+str(reply.id))
 
     return redirect("/")
+
+class SearchView(View):
+    def get(self, request, *args, **kwargs):
+        q = request.GET.get('q','')
+        search_result = Post.objects.filter(Q(title__icontains=q) | Q(tags__name__icontains=q)).distinct()
+
+        context = {
+            'search_result':search_result
+        }
+        return render(request,'pages/search.html',context=context)

@@ -3,7 +3,7 @@
 {% load django_bootstrap5 %}
 {% load crispy_forms_tags %}
 {% load humanize %}
-{% block title %}{% endblock title %}
+{% block title %} Results{{ poll.title }}{% endblock title %}
 {% block content %}
 <div class="row">
     <div class="col-md-8 offset-sm-2">

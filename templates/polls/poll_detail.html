@@ -3,7 +3,7 @@
 {% load django_bootstrap5 %}
 {% load crispy_forms_tags %}
 {% load humanize %}
-{% block title %}{% endblock title %}
+{% block title %} {{ poll.title }}{% endblock title %}
 {% block content %}
 
 <section class="py-3">
@@ -33,26 +33,12 @@
                         <p class="fs-5 mb-3">{{ poll.description | safe }}</p>
                     </section>
                 </article>
-                <div class="form-check form-check-inline">
-                    <form action="{% url 'polls:vote' poll.id %}" method="POST">
-                    
-                        {% csrf_token %}
-                        {{vote_form.as_p}}
-                        {% for choice in poll.choice_set.all %}
-                     
-                        <input type="radio" class="form-check-input" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-                        <label class="form-check-label" for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
-                        
-                        <br>
-                        
-                        {% endfor %}
-                    
-                        <input type="submit" value="Vote" class="btn btn-primary mt-3">
-                        <a class="btn btn-warning mt-3" href="{% url 'polls:poll-list' %}" role="button">Cancel</a>
-                    
-                    </form>
-                </div>
-                <hr>
-              
-                <br>
+<!-- vote form -->
+{% include 'polls/vote_form.html' %}
+<hr>
+<br>
+<!-- Results quick view -->
+{% include 'includes/poll_result_snippet.html' %}
+
+
 {% endblock content %}

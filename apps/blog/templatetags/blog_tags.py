@@ -1,7 +1,7 @@
 from django import template
 from django.db.models import Count
 from django.utils.safestring import mark_safe
-from ..models import Post
+from apps.blog.models import Post
 
 import markdown
 

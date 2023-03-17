@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<div class="container-lg">
+  <header>
+    <h2>Search results for '{{ request.GET.q }}' </h2>
+  </header>
+  <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+    {% for post in search_result %}
+    <div class="col-md-4 mb-3">
+      <div class="card shadow border-0">
+        <div class="card h-100 border-0">
+
+          <img class="card-img-top" src="{{ post.image.url }}" height="300" alt="">
+
+        </div>
+
+        <div class="card-body">
+          <h4 class="card-title text-dark fw-bold">{{ post.title }}</h4>
+
+          <div class="mb-3">
+            <p>
+              <span class="text-dark fw-bold">{{ post.author.first_name }} {{ post.author.last_name }}</span>
+              <small class="text-muted">&nbsp;<i class="bi bi-clock"></i>&nbsp;{{ post.whenpublished }}</small>
+            </p>
+            <p class="card-text text-dark mb-3">
+              {{ post.content|safe|striptags|truncatechars:100 }}
+              <a href="{{ post.get_absolute_url }}" class="text-decoration-none stretched-link">Continue</a>
+
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

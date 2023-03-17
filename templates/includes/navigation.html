@@ -4,44 +4,40 @@
       <a class="navbar-brand" href="/">
         <span class="text-muted">django</span>&nbsp;|&nbsp;Hyperbeam
       </a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ms-auto mb-2 mb-md-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'blog:post-list' %}">Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'users:all-users' %}">Teams</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{% url 'tos:policy-list' %}">Policies</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{% url 'pages:about' %}">About</a>
+            <a class="nav-link active" href="{% url 'polls:poll-list' %}">Polls</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'contact:contact-us' %}">Feedback</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Betas</a>
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'polls:poll-list' %}">Polls</a></li>
+              <li><a class="dropdown-item" href="{% url 'tos:policy-list' %}">Policies</a></li>
+              <li><a class="dropdown-item" href="{% url 'users:all-users' %}">Teams</a></li>
+              <li><a class="dropdown-item" href="{% url 'pages:about' %}">About</a></li>
             </ul>
           </li>
-          <!-- <li class="nav-item">
-            <a href="#" class="nav-link active"><span class="text-muted">{% include 'includes/toggle.html' %}</span></a>
-         
-          </li> -->
         </ul>
-        
-        <form class="d-flex" role="search" action="#" method="get" role="search">
+
+        <!-- Search -->
+        <form class="d-flex" role="search" action="{% url 'blog:search' %}" method="get" role="search">
             <div class="input-group">
-              <input class="form-control mr-3" type="search" name="q" placeholder="Search" aria-label="Search">
+              <input class="form-control mr-3" type="search" name="q" placeholder="Search blog" aria-label="Search">
               <span class="input-group-text"><i class="bi bi-search"></i></span>
             </div>
           </form>
+
       </div>
     </div>
   </nav>
