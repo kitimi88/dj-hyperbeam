@@ -33,6 +33,7 @@ urlpatterns = [
     path('policy/',include('apps.tos.urls',namespace='tos')),
     path('contact-us/',include('apps.contact.urls',namespace='contact')),
     path('polls/',include('apps.polls.urls',namespace='polls')),
+    path('chat/',include('apps.chat.urls',namespace='chat')),
     path('',include('apps.pages.urls',namespace='pages')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]

@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'apps.tos',
     'apps.contact',
     'apps.polls',
+    'apps.chat',
 
     'django_cleanup',
 ]
