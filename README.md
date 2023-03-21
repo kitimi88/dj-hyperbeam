@@ -12,9 +12,7 @@
 
 >Important
 
-By default, I'm using PostgreSQL for this project. However, you can manually configure the DATABASES ```settings.py```.
-
-By default, I'm using PostgretSQL for this project. Most configurations including secrets keys, API reference, etc., are defined and set as enviroment variables in the ```.env```. 
+By default, I'm using PostgreSQL for this project. However, you can manually configure the DATABASES in the ```settings.py```. Most configurations including secrets keys, API reference, etc., are defined and set as enviroment variables in the ```.env```. 
 
 Feel free to  edit the ```env.example.txt``` and save it as ```.env``` together with your preferred configuration. Know more about [python-dotenv.](https://pypi.org/project/python-dotenv/)
 
