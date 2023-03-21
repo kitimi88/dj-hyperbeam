@@ -34,10 +34,11 @@ class PollAdmin(admin.ModelAdmin):
         ('Author',               {'fields': ['author']}),
         ('Description', {'fields':['description']}),
         ('Date information', {'fields': ['publish']}),
+        #('Choices', {'fields': ['choice_text']}),
     ]
 
     inlines = [ChoiceInline]
-    list_display = ('title', 'publish','author')
+    list_display = ('title', 'publish','author','get_vote_count',)
     list_filter = ['publish']
     search_fields = ['title']
     

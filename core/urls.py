@@ -18,7 +18,7 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from apps.blog.sitemaps import PostSitemap
-from apps.blog import views as user_views
+# from apps.blog import views as user_views
 
 sitemaps = {
     'posts': PostSitemap,
