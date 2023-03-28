@@ -3,12 +3,12 @@
 {% load django_bootstrap5 %}
 {% load crispy_forms_tags %}
 {% load humanize %}
-{% block title %} Results{{ poll.title }}{% endblock title %}
+{% block title %} Results{% endblock title %}
 {% block content %}
 <div class="row">
     <div class="col-md-8 offset-sm-2">
         {% if poll.active %}
-        <h3 class="mt-3 mb-3 text-center">Result for: {{ poll.title }}</h3>
+        <h3 class="mt-3 mb-3 text-center">Poll results</h3>
         {% else %}
         <h3 class="mt-3 mb-3 text-center">"{{ poll.title }}" Has Ended Polling !</h3>
         {% endif %}

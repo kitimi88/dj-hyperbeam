@@ -75,15 +75,19 @@ def poll_vote(request, poll_id):
             vote.poll = poll
             vote.save()
             print(vote)
-            messages.success(request, 'Thanks for voting!',extra_tags='alert alert-success alert-dismissible fade show')
+            messages.success(request, 'Poll sucessfully recorded. Thanks for voting!',extra_tags='alert alert-success alert-dismissible fade show')
             return render(request, 'polls/poll_result.html', {'poll': poll})
     else:
         vote_form = ChoiceForm()
-        messages.error(
-            request, "No choice selected!", extra_tags='alert alert-warning alert-dismissible fade show')
-        return redirect("polls:detail", poll_id)
+        messages.error(request, 'Oops. Please select choices.', extra_tags='alert alert-warning alert-dismissible fade show')
+        return redirect('polls:detail', poll_id)
+
+    context = {
+        'poll':poll,
+        'vote_form': vote_form
+    }
     
-    return render(request, 'polls/poll_result.html', {'poll': poll,'vote_form':vote_form})
+    return render(request, 'polls/poll_result.html',context=context)
 
 
 

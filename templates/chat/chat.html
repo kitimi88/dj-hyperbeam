@@ -16,6 +16,7 @@
         </div>
         <form id="chat-form">
             {% csrf_token %}
+            
             <div>
                 <textarea name="" class="form-control" placeholder="What's on your mind?" id="chat-input"></textarea>
             </div>
@@ -42,8 +43,8 @@
                     type: 'POST',
                     data: {input: input},
                     success: function(response) {
-                        var message = '<p><strong>You:</strong> ' + input + '</p>';
-                        message += '<p><strong>ChatGPT:</strong> ' + response.response + '</p>';
+                        var message = '<p><strong>You:</strong> ' + ' ' + input + '</p>';
+                        message += '<p><strong>ChatGPT:</strong> ' + ' ' + response.response + '</p>';
                         $('#chat-messages').append(message);
                         $('#chat-input').val('');
                     }

@@ -68,4 +68,4 @@ class Vote(models.Model):
     email = models.EmailField(null=True,blank=True)
     
     def __str__(self):
-        return f'{self.poll.title[:15]} - {self.choice.choice_text[:15]} {self.email}'
+        return f'{self.poll.title[:100]} - {self.choice.choice_text[:15]} {self.email}'

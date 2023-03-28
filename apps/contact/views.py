@@ -3,7 +3,7 @@ from apps.contact.forms import ContactForm
 from apps.contact.models import ContactUs
 from django.core.mail import BadHeaderError
 from django.core.mail import send_mail as sm
-from django.http import HttpResponse , HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 
 

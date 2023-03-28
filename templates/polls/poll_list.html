@@ -5,6 +5,9 @@
 {% load humanize %}
 {% block title %}Polls{% endblock title %}
 {% block content %}
+<div class="container-lg">
+    <h2 class="fw-bold">Polls</h2>
+
 <div class="container">
     <div class="list-group w-auto">
         {% for poll in polls %}

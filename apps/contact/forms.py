@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactUs
+from apps.contact.models import ContactUs
 
 class ContactForm(forms.ModelForm):
     email = forms.CharField(label='',max_length=50,min_length=10,required=True,widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'Email'}))

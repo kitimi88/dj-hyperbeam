@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
-from .models import UserProfile
+from apps.users.models import UserProfile
 from django.contrib.auth.models import User
 from apps.blog.models import Post
 
