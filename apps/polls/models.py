@@ -22,6 +22,7 @@ class Poll(models.Model):
             return False
         return True
 
+    @property
     def get_vote_count(self):
         return self.vote_set.count()
 

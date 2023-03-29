@@ -1,0 +1,36 @@
+{% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}{% endblock title %}
+{% block content %}
+<section>
+ 
+    <div class="container px-1 mt-3">
+        
+        {% if tag %}<p class="lead">Policies tagged with {{ tag.name }} </p>{% endif %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            {% for post in posts %}
+            <div class="col-lg-4 mb-3">
+                <div class="card h-100">
+                    <div class="card h-100 shadow border-0">
+                        <div class="card-body">
+                            <h4 class="card-title text-dark fw-bold mb-2">{{ post.title }}</h4>
+                            <p class="card-text text-dark mb-0">{{ post.body|safe|striptags|truncatechars:100}}
+                                <a class="text-decoration-none stretched-link"
+                                    href="{{ post.get_absolute_url }}">Continue</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+</section>
+{% include "includes/pagination.html" with page=posts %}
+{% endblock content %}

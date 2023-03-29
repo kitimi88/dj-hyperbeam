@@ -18,3 +18,8 @@ def show_latest_polls(count=5):
 @register.filter(name='markdown')
 def markdown_format(text):
     return mark_safe(markdown.markdown(text))
+
+@register.filter
+def percentage(value):
+    return format(value,'%')
+register.filter('percentage', percentage)

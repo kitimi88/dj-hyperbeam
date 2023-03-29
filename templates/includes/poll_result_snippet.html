@@ -10,14 +10,12 @@
 <h3 class="mt-3 mb-3 text-start">"{{ poll.title }}" Has Ended Polling !</h3>
 {% endif %}
 <div class="col">
+
     {% for choice in poll.choice_set.all %}
-    <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="{{ choice.get_vote_count }}%">
-        <div class="progress-bar bg-{{choice.alert_class}}"style="width:{{ choice.get_vote_count }}%">
-            <div>
-               <b>{{choice.choice_text|truncatewords:50}} - {{choice.percentage|floatformat}} %</b> 
-            </div>
-         
+    <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="30"aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar bg-{{choice.alert_class}}"style="width:{{ choice.get_vote_count }}%">         
         </div>
+        <b>{{choice.choice_text|truncatewords:50}} - {{choice.percentage|floatformat}}</b> 
       </div>
     
     {% endfor %}

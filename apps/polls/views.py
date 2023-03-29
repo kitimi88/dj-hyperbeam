@@ -20,30 +20,6 @@ class AllPollsView(ListView):
         
         return context
 
-# def poll_list(request):
-#     polls = Poll.objects.all()
-#     latest_polls = Poll.objects.order_by('-publish')
-
-#     query = request.GET.get('q')
-#     if query:
-#         polls = Poll.objects.filter(Q(title__icontains=query)).distinct()
-
-#     paginator = Paginator(polls,4)
-#     page = request.GET.get('page')
-#     try:
-#         polls = paginator.page(page)
-#     except PageNotAnInteger:
-#         polls = paginator.page(1)
-#     except EmptyPage:
-#         polls = paginator.page(paginator.num_pages)
-
-#     context = {
-#         'polls':polls,
-#         'latest_polls':latest_polls
-#     }
-#     return render(request,'polls/poll_list.html',context=context)
-
-
 
 def poll_detail(request, poll_id):
     poll = get_object_or_404(Poll, id=poll_id)
@@ -88,31 +64,3 @@ def poll_vote(request, poll_id):
     }
     
     return render(request, 'polls/poll_result.html',context=context)
-
-
-
-# def poll_vote(request,poll_id):
-#     poll = get_object_or_404(Poll, pk=poll_id)
-
-#     if request.method == 'POST':
-#         check1 = False
-#         vote_form = ChoiceForm(request.POST)
-
-#         if vote_form.is_valid():
-#             email = vote_form.cleaned_data['email']
-        
-#         if User.objects.filter(email=email).exists():
-#             check1 = True
-#             messages.error(request='Opps. Seems that you\'ve already voted.',extra_tags='alert alert-warning alert-dismissable fade show')
-        
-#         if check1 == check1:
-#             return redirect('polls:detail',poll_id)
-        
-#         else:
-#             context = {
-#                 'poll':poll,
-#                 'vote_form':vote_form
-#             }
-#             messages.success(request, 'Thanks for voting!',extra_tags='alert alert-success alert-dismissible fade show')
-        
-#         return render(request,'polls/poll_result.html',context=context)

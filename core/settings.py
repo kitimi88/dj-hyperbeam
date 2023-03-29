@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'apps.blog',
     'apps.pages',
     'apps.users',
-    'apps.tos',
     'apps.contact',
     'apps.polls',
     'apps.chat',
