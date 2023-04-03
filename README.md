@@ -68,5 +68,5 @@ _Should you need a new SECRET_KEY, run ```gen_secret_key.py```._
 _Pending contribution guide._
 ***
 ## License
-_Pending_
+[MIT License](./LICENSE)
 
