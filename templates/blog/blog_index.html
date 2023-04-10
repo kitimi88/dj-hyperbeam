@@ -6,7 +6,7 @@
 {% block title %}Blog{% endblock title %}
 {% block content %}
 <main class="flex-shrink-0">
-    <div class="container-lg px-3">
+    <div class="container px-4 px-lg-5 my-3">
         {% if tag %}
         <p class="lead">Articles tagged with {{ tag.name }}</p>
         {% endif %}
@@ -18,12 +18,12 @@
         <div class="card shadow border-0">
             <div class="card h-100 border-0">
            
-                <img class="card-img-top" src="{{ post.image.url }}" height="300" alt="">
+                <img class="card-img-top" src="{{ post.image.url }}" width="600" height="300" alt="">
 
             </div>
 
             <div class="card-body">
-                <h4 class="card-title text-dark fw-bold">{{ post.title }}</h4>
+                <h4 class="card-title mb-3 text-dark fw-bold">{{ post.title }}</h4>
         
             <div class="mb-3">
                 <p>

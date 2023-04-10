@@ -1,5 +1,14 @@
-# A collection of basic Django web applications for beginners.
+# Django-Hyperbeam
+<!-- A collection of basic Django web applications for beginners. -->
 
+## About
+
+A collection of basic Django web applications for beginners is that provides a solid foundation for those who are starting their journey in web development using Django. This collection includes various simple applications that help beginners understand the core concepts of Django and how to build web applications with this framework. 
+
+Basic applications ie., Blog, Poll outlined in the [Django documentation](https://docs.djangoproject.com/en/4.2/intro/tutorial01/#writing-your-first-django-app-part-1).
+
+
+---
 
 ## Applications
 - Blog
@@ -7,14 +16,28 @@
 - Feedbacks/Contact Us
 - Custom user profile
 - ChatGPT
+---
+## Prerequisites
+- [Python 3.10.8 or later](https://www.python.org/downloads/)
+- [PostgreSQL database (version 11 or later)]((https://www.postgresql.org/download/))
+- [Django 4.0 or later](https://www.djangoproject.com/download/)
+- [Git](https://git-scm.com/)
+- <details>
+    <summary>Your preferred web browser</summary>
 
-## Requirements
-- Python 3.10.8 or later
-- PostgreSQL database (version 11 or later)
-- Django 4.0 or later
-- Your preferred web browser
-- Git
+  - [Chrome](https://www.google.com/intl/en_ph/chrome/)
+  - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+  - [Edge](https://www.microsoft.com/edge/download)
+  - [Brave](https://brave.com/download/)
 
+</details>
+
+---
+
+## Important
+* Define your preferred configuration in the [env.example.txt](./env.example.txt) and save it as ```.env```.
+* Should you need a new SECRET_KEY, run [gen_secret_key.py](gen_secret_key.py). Check out my [other repo](https://github.com/kitimi88/python-minis#readme) for more password & token generator.
+---
 ## Installation
 1. Clone reporsitory.
 
@@ -47,14 +70,21 @@ $ py manage.py migrate
 $ py manage.py runserver
 ```
 ---
-### Note
-_Define your preferred configuration in the [env.example.txt](./env.example.txt) and save it as ```.env```. Learn more about [python-dotenv](https://pypi.org/project/python-dotenv) and [django-environ](https://pypi.org/project/django-environ/)._
 
-_Should you need a new SECRET_KEY, run ```gen_secret_key.py```._
+
+## Note
+
+This application requires the following packages:
+
+| Package | Description |
+| ------- | ----------- |
+|[python-dotenv](https://pypi.org/project/python-dotenv/) |Read key-value pairs from .env file and set them as environment variables. In this sample app, those variables describe how to connect API. This package is used in the applications to load environment variables.|
+|[OpenAI API](https://pypi.org/project/openai/) | Chatbot application requires integrating with an external API for natural language processing.
+|[django-environ](https://pypi.org/project/django-environ/) | Allowing users use Twelve-factor methodology to configure your Django application with environment variables.
+|[Bootstrap](https://getbootstrap.com/)| For fast and simple yet powerful web design.
 
 ---
-
-### References and documentations
+## References and documentations
 
 * [Django](https://docs.djangoproject.com/en/4.1/)
 * [Bootstrap](https://getbootstrap.com/)
@@ -64,10 +94,11 @@ _Should you need a new SECRET_KEY, run ```gen_secret_key.py```._
 * [Django with PostgreSQL in Azure](https://learn.microsoft.com/en-us/azure/app-service/tutorial-python-postgresql-app?tabs=flask%2Cwindows&pivots=deploy-portal)
 
 ---
-### Screenshots
+## Screenshots
 ![Indexpage](./screenshots/blog_page.PNG)
 ![Blogpost](./screenshots/blog_post.PNG)
 ![Chatbot](./screenshots/gpt_chat.png)
+![user_profile_page](./screenshots/user_profile_page.png)
 ![poll_list](./screenshots/poll_list.png)
 ![poll_detail](./screenshots/poll_detail.png)
 ---
