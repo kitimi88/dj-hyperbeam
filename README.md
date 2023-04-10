@@ -48,7 +48,7 @@ $ py manage.py runserver
 ```
 ---
 ### Note
-_Define your preferred configuration in the ```env.example.txt``` and save it as ```.env```. Learn more about [python-dotenv](https://pypi.org/project/python-dotenv) and [django-environ](https://pypi.org/project/django-environ/)._
+_Define your preferred configuration in the [env.example.txt](./env.example.txt) and save it as ```.env```. Learn more about [python-dotenv](https://pypi.org/project/python-dotenv) and [django-environ](https://pypi.org/project/django-environ/)._
 
 _Should you need a new SECRET_KEY, run ```gen_secret_key.py```._
 
@@ -63,6 +63,13 @@ _Should you need a new SECRET_KEY, run ```gen_secret_key.py```._
 * [Openai (API Reference)](https://platform.openai.com/docs/api-reference)
 * [Django with PostgreSQL in Azure](https://learn.microsoft.com/en-us/azure/app-service/tutorial-python-postgresql-app?tabs=flask%2Cwindows&pivots=deploy-portal)
 
+---
+### Screenshots
+![Indexpage](./screenshots/blog_page.PNG)
+![Blogpost](./screenshots/blog_post.PNG)
+![Chatbot](./screenshots/gpt_chat.png)
+![poll_list](./screenshots/poll_list.png)
+![poll_detail](./screenshots/poll_detail.png)
 ---
 ## Contributions
 _Pending contribution guide._
