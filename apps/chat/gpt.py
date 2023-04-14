@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import openai
 load_dotenv('./.env')
-
+import textwrap
 openai.api_key = os.environ['OPEN_API_KEY']
 
 
@@ -19,6 +19,13 @@ def generate_response(prompt):
         presence_penalty=0.6,
     )
 
-    return response.choices[0].text.strip()
+    message = response.choices[0].text.strip()
+    message = textwrap.fill(message, width=60)
+    numbered_response = ""
+    lines = message.split("\n")
+    for i, line in enumerate(lines):
+        numbered_response += str(i+1) + ". " + line + "\n"
+    return message
+    # return response.choices[0].text.strip()
 
 

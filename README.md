@@ -34,11 +34,8 @@ Basic applications ie., Blog, Poll outlined in the [Django documentation](https:
 
 ---
 
-## Important
-* Define your preferred configuration in the [env.example.txt](./env.example.txt) and save it as ```.env```.
-* Should you need a new SECRET_KEY, run [gen_secret_key.py](gen_secret_key.py). Check out my [other repo](https://github.com/kitimi88/python-minis#readme) for more password & token generator.
----
 ## Installation
+
 1. Clone reporsitory.
 
 ```bash
@@ -51,30 +48,39 @@ $ git clone https://github.com/kitimi88/dj-hyperbeam.git
 $ py -m venv .venv
 $ .venv\scripts\activate
 ```
+3. Upgrade pip (Whenever necessary).
 
-3. Install required dependecies.
+```bash
+$ py -m pip install --upgrade pip
+```
+
+4. Install required dependecies.
 
 ```bash
 $ py -m pip install -r requirements.txt
 ```
-4. Setup database and apply migration.
+5. Setup database and apply migration.
 
 ```bash
 $ py manage.py makemigrations
 $ py manage.py migrate
 ```
 
-5. Start development server.
+6. Start development server.
 
 ```bash
 $ py manage.py runserver
+```
+**IMPORTANT** - Your preferred configuration should be defined in the [env.example.txt](./env.example.txt) and save it as ```.env``` in your main directory. Should you need a new SECRET_KEY, run the following:
+```bash
+$ py gen_secret_key.py
 ```
 ---
 
 
 ## Note
 
-This application requires the following packages:
+This application may require the following packages:
 
 | Package | Description |
 | ------- | ----------- |
@@ -107,4 +113,7 @@ _Pending contribution guide._
 ***
 ## License
 [MIT License](./LICENSE)
+
+---
+Check out my other [respository](https://github.com/kitimi88/python-minis#python-minis) for more python projects.
 

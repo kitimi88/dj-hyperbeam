@@ -5,7 +5,8 @@
 {% load humanize %}
 {% block title %} {{ poll.title }}{% endblock title %}
 {% block content %}
-
+<main class="flex-shrink-0">
+    <div class="container px-4 px-lg-5 my-3">
 <section class="py-3">
     <div class="container-lg px-1">
         <div class="row gx-5">
@@ -39,6 +40,12 @@
 <br>
 <!-- Results quick view -->
 {% include 'includes/poll_result_snippet.html' %}
+            </div>
+        </div>
+    </div>
+</section>
+    </div>
+</main>
 
 
 {% endblock content %}
