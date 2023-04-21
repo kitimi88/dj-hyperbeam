@@ -15,20 +15,25 @@
             <a class="nav-link active" aria-current="page" href="{% url 'blog:post-list' %}">Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'polls:poll-list' %}">Polls</a>
+            <a class="nav-link active" href="{% url 'users:all-users' %}">Team</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'chat:chat' %}">ChatGPT</a>
+            <a class="nav-link active" href="{% url 'pages:about' %}">About</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{% url 'contact:contact-us' %}">Feedback</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Apps</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'chat:chat' %}">ChatBOT</a></li>
+              <li><a class="dropdown-item" href="{% url 'polls:poll-list' %}">Polls</a></li>
+              <li><a class="dropdown-item" href="{% url 'passwordgen:generate_password' %}">Password Generator</a></li>
+            </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{% url 'pages:policy-list' %}">Policies</a></li>
               <li><a class="dropdown-item" href="{% url 'users:all-users' %}">Teams</a></li>
-              <li><a class="dropdown-item" href="{% url 'pages:about' %}">About</a></li>
+              <li><a class="dropdown-item" href="{% url 'contact:contact-us' %}">Feedback</a></li>
             </ul>
           </li>
         </ul>

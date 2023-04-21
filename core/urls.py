@@ -35,6 +35,7 @@ urlpatterns = [
     path('polls/',include('apps.polls.urls',namespace='polls')),
     path('chat/',include('apps.chat.urls',namespace='chat')),
     path('',include('apps.pages.urls',namespace='pages')),
+    path('password-generator',include('apps.passwordgen.urls',namespace='passwordgen')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 if settings.DEBUG:

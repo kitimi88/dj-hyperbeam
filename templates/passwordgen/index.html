@@ -1,0 +1,97 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}Password Generator{% endblock title %}
+{% block content %}
+
+<div class="container-lg">
+
+  <div class="py-3 text-start">
+    <h2>Password Generator</h2>
+    <p class="lead">Simple password generator. Range limit is from 8 to 64 characters.</p>
+
+  </div>
+  <!-- include sidebar -->
+  <div class="col-md-7 col-lg-8">
+
+    <div class="col-md-7 col-lg-8">
+
+      <div class="input-group">
+
+        <h4 class="mb-3">
+
+          Your password: &nbsp;
+        </h4>
+        {% if password %}<p class="lead"><strong><input type="text" id="copyTarget" value="{{password}}"></p></strong>
+        <span id="copyButton" class="input-group-addon btn" title="Copy to clipboad">
+          <i class="bi bi-clipboard-fill" aria-hidden="true"></i>
+        </span>
+
+        {% endif %}
+
+
+
+      </div>
+    </div>
+    </h4>
+
+
+    <form action="" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <button type="submit" class="btn btn-lg btn-primary">Generate</button>
+    </form>
+  </div>
+
+
+</div>
+</div>
+{% block javascripts %}
+<script>
+  (function () {
+    "use strict";
+
+    function copyToClipboard(elem) {
+      var target = elem;
+
+      // select the content
+      var currentFocus = document.activeElement;
+
+      target.focus();
+      target.setSelectionRange(0, target.value.length);
+
+      // copy the selection
+      var succeed;
+
+      try {
+        succeed = document.execCommand("copy");
+      } catch (e) {
+        console.warn(e);
+
+        succeed = false;
+      }
+
+      // Restore original focus
+      if (currentFocus && typeof currentFocus.focus === "function") {
+        currentFocus.focus();
+      }
+
+      if (succeed) {
+        $(".copied").animate({ top: -25, opacity: 0 }, 700, function () {
+          $(this).css({ top: 0, opacity: 1 });
+        });
+      }
+
+      return succeed;
+    }
+
+    $("#copyButton, #copyTarget").on("click", function () {
+      copyToClipboard(document.getElementById("copyTarget"));
+    });
+  })();
+
+</script>
+{% endblock javascripts %}
+{% endblock content %}

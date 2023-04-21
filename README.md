@@ -16,6 +16,7 @@ Basic applications ie., Blog, Poll outlined in the [Django documentation](https:
 - Feedbacks/Contact Us
 - Custom user profile
 - ChatGPT
+- Password Generator
 ---
 ## Prerequisites
 - [Python 3.10.8 or later](https://www.python.org/downloads/)
@@ -107,6 +108,7 @@ This application may require the following packages:
 ![user_profile_page](./screenshots/user_profile_page.png)
 ![poll_list](./screenshots/poll_list.png)
 ![poll_detail](./screenshots/poll_detail.png)
+![password_gen](./screenshots/app_passwgen.png)
 ---
 ## Contributions
 _Pending contribution guide._
