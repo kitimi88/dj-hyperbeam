@@ -65,7 +65,7 @@ def post_list(request, tag_slug=None):
 def post_detail(request, post):
     post = get_object_or_404(Post,slug=post,status='published')
 
-    comments = post.comments.filter(active=True)
+    comments = post.comments.filter(active=True).order_by('-updated')
     new_comment = None
 
     if request.method == 'POST':
@@ -80,9 +80,11 @@ def post_detail(request, post):
         comment_form = CommentForm()
 
     post_tags_ids = post.tags.values_list('id', flat=True)
-    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id) # type: ignore
     similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags','-publish')[:6]
 
+    # comment_form = CommentForm()
+    
     context = {
         'post': post,
         'comments': comments,
@@ -90,7 +92,7 @@ def post_detail(request, post):
         'similar_posts':similar_posts
     }
     
-    return render(request, 'blog/post_detail.html',context=context)
+    return render(request, 'blog/post_detail.html',context)
 
 
     

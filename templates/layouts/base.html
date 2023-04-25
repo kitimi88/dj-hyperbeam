@@ -28,8 +28,10 @@
         {% include 'includes/navigation.html' %}
     </header>
     <main class="flex-shrink-0">
+        <div class="container-lg px-1">
             {% include 'includes/messages.html' %}
             {% block content %}{% endblock content %}
+        </div>
     </main>
 
     {% include 'includes/footer.html' %}

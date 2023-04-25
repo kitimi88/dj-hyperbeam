@@ -74,7 +74,7 @@ $ py manage.py runserver
 ```
 **IMPORTANT** - Your preferred configuration should be defined in the [env.example.txt](./env.example.txt) and save it as ```.env``` in your main directory. Should you need a new SECRET_KEY, run the following:
 ```bash
-$ py gen_secret_key.py
+$ py sskey_gen.py
 ```
 ---
 

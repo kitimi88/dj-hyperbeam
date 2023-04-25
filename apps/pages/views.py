@@ -101,7 +101,7 @@ class PostDetail(DetailView):
 def policy_detail(request, post):
     post=get_object_or_404(SitePolicy,slug=post,status='published')
     post_tags_ids = post.tags.values_list('id', flat=True)
-    similar_posts = SitePolicy.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+    similar_posts = SitePolicy.published.filter(tags__in=post_tags_ids).exclude(id=post.id) # type: ignore
     similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags','-publish')[:6]
     
     return render(request, 'pages/policy_detail.html',{'post':post,'similar_posts':similar_posts})

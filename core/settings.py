@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'crispy_forms',
-    'django_bootstrap5',
+    'django_bootstrap5', # https://django-bootstrap5.readthedocs.io/en/latest/installation.html
     'ckeditor',
     'ckeditor_uploader',
     'taggit',

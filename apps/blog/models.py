@@ -45,7 +45,7 @@ class Post(models.Model):
         return reverse('blog:post-detail',args=[self.slug])
 
     def get_comments(self):
-        return self.comments.filter(parent=None).filter(active=True)
+        return self.comments.filter(parent=None).filter(active=True) # type: ignore
         
     def whenpublished(self):
         now = timezone.now()

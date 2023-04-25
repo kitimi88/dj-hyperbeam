@@ -20,32 +20,27 @@
 
       <div class="input-group">
 
-        <h4 class="mb-3">
 
-          Your password: &nbsp;
-        </h4>
-        {% if password %}<p class="lead"><strong><input type="text" id="copyTarget" value="{{password}}"></p></strong>
-        <span id="copyButton" class="input-group-addon btn" title="Copy to clipboad">
-          <i class="bi bi-clipboard-fill" aria-hidden="true"></i>
-        </span>
-
-        {% endif %}
+        <div class="input-group mb-3">
 
 
+          <label class="input-group-text"><strong>Your password:</strong></label>
+          {% if password %}
+          <input type="text" value="{{password}}" id="copyTarget" class="form-control" placeholder="" aria-label=""
+            aria-describedby="button-addon2">
+          <button class="btn btn-outline-secondary" type="button" title="Copy to clipboad" id="copyButton"><i
+              class="bi bi-clipboard-fill" aria-hidden="true"></i></button>
+          {% endif %}
+        </div>
 
       </div>
+      <form action="" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">Generate</button>
+      </form>
     </div>
-    </h4>
-
-
-    <form action="" method="POST">
-      {% csrf_token %}
-      {% bootstrap_form form %}
-      <button type="submit" class="btn btn-lg btn-primary">Generate</button>
-    </form>
   </div>
-
-
 </div>
 </div>
 {% block javascripts %}

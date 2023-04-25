@@ -1,6 +1,7 @@
 {% extends 'layouts/base.html' %}
-{% load django_bootstrap5 %}
 {% load static %}
+{% load django_bootstrap5 %}
+
 {% load crispy_forms_tags %}
 {% load humanize %}
 {% block title %}Chat{% endblock title %}
@@ -8,51 +9,53 @@
 <div class="container-lg">
     <h2 class="fw-bold">Django & ChatGPT</h2>
     <hr class="featurette-divider">
-    
-<div class="row g-3 mt-3">
-<div class="col-md-10">
-    
-    <div id="chat-container">
-        <div class="card bg-light border-0 mb-3">
-            <div id="chat-messages"></div>
+
+    <div class="row g-3 mt-3">
+        <div class="col-md-10">
+
+            <div id="chat-container">
+
+                <div class="alert alert-primary border-0 mb-3">
+                    <div id="chat-messages"></div>
+                </div>
+                <form id="chat-form" method="POST">
+                    {% csrf_token %}
+        
+                    <div>
+                        <textarea name="" class="form-control" placeholder="Message"
+                            id="chat-input"></textarea>
+                    </div>
+
+
+                    <div class="col-auto mt-3">
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-send-fill"></i></button>
+                    </div>
+
+                </form>
+            </div>
         </div>
-        <form id="chat-form">
-            {% csrf_token %}
-            
-            <div>
-                <textarea name="" class="form-control" placeholder="What's on your mind?" id="chat-input"></textarea>
-            </div>
- 
-         
-            <div class="col-auto mt-3">
-                <button type="submit" class="btn btn-primary"><i class="bi bi-send-fill"></i></button>
-            </div>
-            
-        </form>
     </div>
-</div>
-</div>
 </div>
 
 {% block javascripts %}
-    <script>
-        $(document).ready(function() {
-            $('#chat-form').submit(function(event) {
-                event.preventDefault();
-                var input = $('#chat-input').val();
-                $.ajax({
-                    url: '/chat/',
-                    type: 'POST',
-                    data: {input: input},
-                    success: function(response) {
-                        var message = '<p><strong>You:</strong> ' + ' ' + input + '</p>';
-                        message += '<p><strong>ChatGPT:</strong> ' + ' ' + response.response + '</p>';
-                        $('#chat-messages').append(message);
-                        $('#chat-input').val('');
-                    }
-                });
+<script>
+    $(document).ready(function () {
+        $('#chat-form').submit(function (event) {
+            event.preventDefault();
+            var input = $('#chat-input').val();
+            $.ajax({
+                url: '/chat/',
+                type: 'POST',
+                data: { input: input },
+                success: function (response) {
+                    var message = '<p><strong>You:</strong> ' + ' ' + input + '</p>';
+                    message += '<p><strong>ChatGPT:</strong> ' + ' ' + response.response + '</p>';
+                    $('#chat-messages').append(message);
+                    $('#chat-input').val('');
+                }
             });
         });
-    </script>
+    });
+</script>
 {% endblock javascripts %}
 {% endblock content %}

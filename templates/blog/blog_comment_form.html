@@ -1,4 +1,5 @@
 {% load static %}
+{% load django_bootstrap5 %}
 {% load crispy_forms_tags %}
 {% load article_utils %}
 {% load humanize %}
@@ -6,15 +7,14 @@
 <section>
     <div>
         <!-- comment form -->
-        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Leave a comment
         </button>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content rounded-3 shadow">
                     <div class="modal-header border-bottom-0">
-                        <h5 class="modal-title text-dark">Leave a comment</h5>
+                        <h5 class="modal-title text-dark">Comment</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -29,12 +29,13 @@
                             <span class="badge rounded-pill bg-warning text-dark me-auto">Note: <i
                                     class="bi bi-exclamation-triangle-fill"></i></span>
                             <small>
-                               <span class="text-dark">
-                                You can view your comment(s) as soons as all review process are completed.
-                                Know more about our<a href="{% url 'pages:policy-list' %}" target="_blank" class="text-decoration-none">
-                                    comment policy.</a>
-                               </span>
-                                
+                                <span class="text-dark">
+                                    You can view your comment(s) as soons as all review process are completed.
+                                    Know more about our<a href="{% url 'pages:policy-list' %}" target="_blank"
+                                        class="text-decoration-none">
+                                        comment policy.</a>
+                                </span>
+
                             </small>
                             <br>
                             <div class="modal-footer flex-nowrap p-0 mt-3">

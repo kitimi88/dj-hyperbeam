@@ -8,7 +8,7 @@ urlpatterns = [
     path('',views.IndexView.as_view(),name='index'),
     path('about/',AboutPage.as_view(),name='about'),
     path('policy/',views.policy_list,name='policy-list'),
-    path('<slug:post>/',views.policy_detail,name='policy-detail'),
+    path('policy/<slug:post>/',views.policy_detail,name='policy-detail'),
     
     #re_path(r'^.*\.*', views.pages, name='pages'),
 ]

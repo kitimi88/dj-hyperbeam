@@ -13,11 +13,10 @@
              
                     <div class="ms-3">
                         <div class="fs-3 fw-bold">{{ post.title }}</div>
-                        <div class="text-muted fs-6"><small>{{ post.whenpublished }}</small></div>
+
                         <div class="text-muted mb-0">
-                            <small>
-                                Published: {{ post.publish | naturalday | capfirst}} &nbsp;|&nbsp;
-                                Updated: {{ post.updated | naturalday | capfirst}}
+                            <small><strong> Published: </strong>
+                               {{ post.publish | naturalday | capfirst}}<i class="bi bi-dot"></i>{{ post.whenpublished }} 
                             </small> 
                         </div>
                        
