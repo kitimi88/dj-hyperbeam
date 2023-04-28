@@ -1,34 +1,35 @@
 import os
 import sys
-from dotenv import load_dotenv
 import openai
-load_dotenv('./.env')
 import textwrap
 
-openai.api_key = os.environ['OPENAI_API_KEY']
+openai.api_key = os.getenv('OPENAI_API_KEY')
+
+MODEL = "gpt-3.5-turbo"
+
+messages = [{"role": "system", "content": "You are a friendly and helpful assistant."}]
+
+# For sarcastic responses:
+# messages = [{"role": "system", "content": "You are sarcastic assistant that reluctantly answers questions with sarcastic responses."}]
 
 
 def generate_response(prompt):
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=prompt,
-        temperature=0.9,
+    messages.append(
+        {"role": "user", "content": prompt}
+    )
+    response = openai.ChatCompletion.create(
+        model=MODEL,
+        messages = messages,
         max_tokens=300,
-        n=1,
-        top_p=1,
-        stop=None,
-        frequency_penalty=0.0,
-        presence_penalty=0.6,
     )
 
-    message = response.choices[0].text.strip() # type: ignore
+    message = response['choices'][0]['message']['content']
     message = textwrap.fill(message, width=60)
     numbered_response = ""
     lines = message.split("\n")
     for i, line in enumerate(lines):
         numbered_response += str(i+1) + ". " + line + "\n"
     return message
-    # return response.choices[0].text.strip()
 
 
 def chat_prompts():
@@ -40,7 +41,6 @@ def chat_prompts():
             sys.exit()
         else:
             prompt = (f"User: {user_input} \nChatGPT: ")
-            #prompt = f"User: {user_input}\nGPT3.5 Turbo:"
             response = generate_response(prompt)
             print("\nChatGPT:", response)
             print('')

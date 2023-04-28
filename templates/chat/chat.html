@@ -18,20 +18,18 @@
                 <div class="alert alert-primary border-0 mb-3">
                     <div id="chat-messages"></div>
                 </div>
-                <form id="chat-form" method="POST">
+
+                <form class="w-100 me-3" id="chat-form" method="POST">
                     {% csrf_token %}
-        
-                    <div>
-                        <textarea name="" class="form-control" placeholder="Message"
-                            id="chat-input"></textarea>
+                    <div class="col-auto">
+                    <div class="input-group">
+                        <input class="form-control form-control-md" placeholder="Message" id="chat-input" aria-label="chat">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-send-fill"></i></button>
+                    </div>
+            
                     </div>
 
-
-                    <div class="col-auto mt-3">
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-send-fill"></i></button>
-                    </div>
-
-                </form>
+                  </form>
             </div>
         </div>
     </div>

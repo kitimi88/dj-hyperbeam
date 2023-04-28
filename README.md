@@ -24,7 +24,7 @@ Basic applications ie., Blog, Poll outlined in the [Django documentation](https:
 - [Django 4.0 or later](https://www.djangoproject.com/download/)
 - [Git](https://git-scm.com/)
 - <details>
-    <summary>Your preferred web browser</summary>
+    <summary>Web browser</summary>
 
   - [Chrome](https://www.google.com/intl/en_ph/chrome/)
   - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
@@ -117,5 +117,5 @@ _Pending contribution guide._
 [MIT License](./LICENSE)
 
 ---
-Check out my other [respository](https://github.com/kitimi88/python-minis#python-minis) for more python projects.
+Check out my other [respository](https://github.com/kitimi88?tab=repositories) for more python projects.
 
