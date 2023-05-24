@@ -3,7 +3,7 @@
 
 ## About
 
-A collection of basic Django web applications for beginners is that provides a solid foundation for those who are starting their journey in web development using Django. This collection includes various simple applications that help beginners understand the core concepts of Django and how to build web applications with this framework. 
+A collection of basic Django web applications that provides a solid foundation for those who are starting their journey in web development using Django. This collection includes various simple applications that help beginners understand the core concepts of Django and how to build web applications with this framework. 
 
 Basic applications ie., Blog, Poll outlined in the [Django documentation](https://docs.djangoproject.com/en/4.2/intro/tutorial01/#writing-your-first-django-app-part-1).
 
