@@ -7,3 +7,4 @@ class ChoiceForm(forms.ModelForm):
     class Meta:
         model = Vote
         fields = ('email',)
+

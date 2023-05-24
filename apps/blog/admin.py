@@ -1,31 +1,29 @@
 from django.contrib import admin
-from .models import Post, Comment
+from apps.blog.models import Post, Comment
+
+@admin.action(description="Mark selected stories as published")
+def make_published(modeladmin, request, queryset):
+    queryset.update(status='p')
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    # fieldsets = (
-    #     (None,{'fields':['title']}),
-    #     ('Author',{'fields':['author']}),
-    #     ('Slug',{'fields':['slug']}),
-    #     ('Image',{'fields':['image']}),
-    #     ('Content',{'fields':['content']}),
-    #     ('Status',{'fields':['status']}),
-    #     ('Tags',{'fields':['tags']}),
-    # )
-    list_display = ('title', 'author', 'publish', 'status','tag_list')
-    list_filter = ('status', 'created', 'publish',  'author',)
+    list_display = ('title', 'author', 'pub_date', 'status','tag_list')
+    list_filter = ('status', 'created', 'pub_date',  'author',)
     search_fields = ('title', 'content')
     prepopulated_fields = {'slug': ('title',)}
     # raw_id_fields = ("author",)
-    date_hierarchy = 'publish'
+    date_hierarchy = 'pub_date'
     ordering = ('status',)
-    # list_display = ['tag_list']
+    actions = [make_published]
+
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related('tags')
 
     def tag_list(self, obj):
         return u", ".join(o.name for o in obj.tags.all())
+
+
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):

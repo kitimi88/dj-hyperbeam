@@ -22,9 +22,8 @@
                         <form action="{{ post.get_absolute_url }}" method="POST">
 
                             {% csrf_token %}
-
-                            {{ comment_form.as_p }}
-
+                            {% bootstrap_form comment_form %}
+                       
 
                             <span class="badge rounded-pill bg-warning text-dark me-auto">Note: <i
                                     class="bi bi-exclamation-triangle-fill"></i></span>

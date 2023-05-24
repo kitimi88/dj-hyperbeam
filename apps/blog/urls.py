@@ -9,8 +9,8 @@ app_name = 'blog'
 urlpatterns=[
 
     path('',views.post_list,name="post-list"),
-    path('article/<slug:post>/',views.post_detail,name="post-detail"),
-    path('search/',views.SearchView.as_view(),name='search'),
+    path('article/<slug:post>',views.post_detail,name="post-detail"),
+    path('article/search/',views.SearchView.as_view(),name='search'),
     path('comment/reply/', views.reply_page, name="reply"),
     path('tag/<slug:tag_slug>/',views.post_list, name='post_tag'),
     path('feed/', LatestPostsFeed(), name='post_feed'),

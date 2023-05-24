@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 def main():
     """Run administrative tasks."""
-    msg = '\nLoading . . .\n'
+    msg = '\nLoading . . .'
     if not 'WEBSITE_HOSTNAME' in os.environ:
         print (msg)
         load_dotenv('./.env')

@@ -29,8 +29,8 @@ def featured_post(request):
 def post_list(request, tag_slug=None):
     posts = Post.published.all()
     #featured_post = Post.published.filter(featured=True).first()
-    # latest_posts = Post.objects.order_by('-updated')
-    latest_posts = Post.published.filter().order_by('-publish')
+   # latest_posts = Post.objects.all()
+    latest_posts = Post.published.filter().order_by('-pub_date')
     tag = None
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
@@ -38,7 +38,7 @@ def post_list(request, tag_slug=None):
 
     query = request.GET.get("q")
     if query:
-        posts = Post.published.filter(Q(title__icontains=query) | Q(tags__name__icontains=query)).distinct()
+        posts = Post.objects.filter(Q(title__icontains=query) | Q(tags__name__icontains=query)).distinct()
             
     
     paginator = Paginator(posts,6)
@@ -63,7 +63,7 @@ def post_list(request, tag_slug=None):
 
 
 def post_detail(request, post):
-    post = get_object_or_404(Post,slug=post,status='published')
+    post = get_object_or_404(Post,slug=post,status='p')
 
     comments = post.comments.filter(active=True).order_by('-updated')
     new_comment = None
@@ -81,7 +81,7 @@ def post_detail(request, post):
 
     post_tags_ids = post.tags.values_list('id', flat=True)
     similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id) # type: ignore
-    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags','-publish')[:6]
+    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags','-pub_date')[:6]
 
     # comment_form = CommentForm()
     
@@ -92,7 +92,7 @@ def post_detail(request, post):
         'similar_posts':similar_posts
     }
     
-    return render(request, 'blog/post_detail.html',context)
+    return render(request, 'blog/post_detail.html',context=context)
 
 
     

@@ -163,3 +163,6 @@ assets
 vendor
 migrations
 dummies
+blog_uploads
+default_avatar.png
+default_post.png

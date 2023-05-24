@@ -20,7 +20,7 @@ from django.views.generic import ListView, DetailView
 
 class IndexView(ListView):
     def get(self, request, *args, **kwargs):
-        latest_posts = Post.objects.order_by('-updated')[0:3]
+        latest_posts = Post.published.filter().order_by('-pub_date')
         latest_polls = Poll.objects.order_by('-updated')[0:3]
 
         context = {

@@ -3,21 +3,18 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load humanize %}
-{% block title %}Profile{% endblock title %}
+{% block title %}Teams{% endblock title %}
 {% block content %}
 <section>
     <div class="container-lg px-3">
       <div class="row row-cols-1 row-cols-md-3 g-0 gx-1">
-      {% for user in profile %}
+      {% for user in profiles %}
       <div class="col">
         <div class="card mb-3 border-0" style="max-width: 400px;">
           <div class="row row-cols-1 g-0">
             <div class="col-md-4">
-              {% if user.user.profile.avatar %}
               <img src="{{user.user.profile.avatar.url}}" class="card-img rounded-start" alt="...">
-              {% else %}
-              <img src="{% static 'assets/defaults/default_avatar.png' %}" class="card-img rounded-start" alt="...">
-              {% endif %}
+
             </div>
             <div class="col-md-8">
               <div class="card-body">

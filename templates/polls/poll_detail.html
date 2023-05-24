@@ -32,10 +32,11 @@
                     <hr>
                     <section class="mb-3">
                         <p class="fs-5 mb-3">{{ poll.description | safe }}</p>
+                        {% include 'polls/vote_form.html' %}
                     </section>
                 </article>
 <!-- vote form -->
-{% include 'polls/vote_form.html' %}
+
 <hr>
 <br>
 <!-- Results quick view -->

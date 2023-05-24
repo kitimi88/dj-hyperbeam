@@ -10,8 +10,8 @@
 <section class="py-5 text-center container">
   <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-bold">Django Hyperbeam</h1>
-      <p class="lead text-body-secondary">A collection of basic Django web applications for beginners is that provides a solid foundation for those who are starting their journey in web development using Django.</p>
+      <h1 class="fw-normal">{{ current_time|time_based_greeting }}</h1>
+      <p class="lead text-body-secondary">Welcome to Hyperbeam - A collection of basic Django web applications for beginners is that provides a solid foundation for those who are starting their journey in web development using Django.</p>
 
 
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -28,7 +28,7 @@
     <div class="row gx-5">
         <div class="col-lg-8 col-xl-6">
             <div class="text-start">
-                <h2 class="fw-bold">Latest stories</h2>
+                <h2 class="fw-normal">Latest stories</h2>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
               
               <img src="{{ post.image.url }}" alt="" width="600" height="300" class="card-img-top">
               <div class="card-body">
-                <h4 class="card-title mb-3 fw-bold text-dark">{{post.title}}</h4>
+                <h4 class="card-title mb-3 fw-normal text-dark">{{post.title}}</h4>
                 <p class="text-dark">{{ post.content|safe|striptags|truncatechars:100}}</p>
                 
                 <div class="d-flex justify-content-between align-items-center">
@@ -77,7 +77,7 @@
       <div class="row gx-5">
           <div class="col-lg-8 col-xl-6">
               <div class="text-start">
-                  <h2 class="fw-bold">Polls</h2>
+                  <h2 class="fw-normal">Polls & survey</h2>
               </div>
           </div>
       </div>

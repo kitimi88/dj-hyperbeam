@@ -1,6 +1,7 @@
 {% load static %}
-{% load crispy_forms_tags %}
 {% load article_utils %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
 {% load humanize %}
 {% block content %}
 
@@ -18,7 +19,7 @@
             <div class="d-flex align-items-start mb-3">
                 <div>
                     <div class="fw-bold">{{ comment.name }}
-                        <span class="text-muted"><small> -  {{ comment.whenposted }}</small></span></div>
+                        <span class="text-muted"><small> -  {{ comment.post_date|time_ago }}</small></span></div>
                     <p class="ms-3">{{ comment.body|safe }}</p>
 
                 </div>
@@ -28,7 +29,7 @@
             
             {% csrf_token %}
 
-            {{ form.as_p }}
+            {% bootstrap_form form %}
 
         </form>
         {% empty %}

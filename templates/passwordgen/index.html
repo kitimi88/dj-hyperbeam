@@ -34,11 +34,12 @@
         </div>
 
       </div>
-      <form action="" method="POST">
+      <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" class="btn btn-primary">Generate</button>
+        {% bootstrap_button "Generate" button_type="submit" button_class="btn btn-primary" %}
       </form>
+      
     </div>
   </div>
 </div>

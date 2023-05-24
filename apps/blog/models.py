@@ -6,27 +6,35 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
 import math
+from PIL import Image
 
+# return "user_{0}/{1}".format(instance.user.id, filename)
+
+
+def post_image_path(instance, filename):
+    return f"blog_uploads/{instance.author.username}/images/{filename}"
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
-        return super(PublishedManager,self).get_queryset().filter(status='published')
+        return super(PublishedManager,self).get_queryset().filter(status='p')
 
 class Post(models.Model):
+
     STATUS_CHOICES = (
-        ('draft','Draft'),
-        ('published','Published'),
+        ("d","Draft"),
+        ("p","Published"),
+        ("w","Withdrawn")
     )
 
-    title = models.CharField(max_length=100,null=True,blank=True)
-    slug = models.SlugField(max_length=250,unique_for_date='publish')
-    image = models.ImageField(default='static/assets/defaults/default_post.png',upload_to='media/posts/images',blank=True)
+    title = models.CharField(max_length=100, null=True,blank=True)
+    slug = models.SlugField(max_length=250, unique_for_date='pub_date')
+    image = models.ImageField(default='default_post.png',upload_to=post_image_path, null=True, blank=True)
     author = models.ForeignKey(User,on_delete=models.CASCADE,related_name='blog_posts')
     content = RichTextUploadingField()
-    publish = models.DateTimeField(default=timezone.now)
+    pub_date = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=20,choices=STATUS_CHOICES,default='draft')
+    status = models.CharField(max_length=20,choices=STATUS_CHOICES,default="d")
     featured = models.BooleanField(default=False)
 
     objects = models.Manager()
@@ -34,7 +42,7 @@ class Post(models.Model):
     tags = TaggableManager(blank=True)
 
     class Meta:
-        ordering = ('-publish',)
+        ordering = ('-pub_date',)
 
     
     def __str__(self):
@@ -43,65 +51,21 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return reverse('blog:post-detail',args=[self.slug])
+    
+    def save(self, *args, **kwargs):
+        super().save()
+
+        img = Image.open(self.image.path)
+        
+        if img.height > 1080 or img.width > 1920:
+            new_img = (1080, 1920)
+            img.thumbnail(new_img)
+            img.save(self.image.path)
+
 
     def get_comments(self):
         return self.comments.filter(parent=None).filter(active=True) # type: ignore
         
-    def whenpublished(self):
-        now = timezone.now()
-        diff = now - self.publish
-        #seconds
-        if diff.days == 0 and diff.seconds >= 0 and diff.seconds < 60:
-            seconds = diff.seconds
-            if seconds == 1:
-                return str() + ' Just now'
-            else:
-                return str(seconds) + ' seconds ago'
-        #minutes
-        if diff.days == 0 and diff.seconds >= 60 and diff.seconds < 3600:
-            minutes = math.floor(diff.seconds/60)
-            if minutes == 1:
-                return str() + ' about a minute ago'
-            else:
-                return str(minutes) + ' minutes ago'
-        #hours
-        if diff.days == 0 and diff.seconds >= 3600 and diff.seconds < 86400:
-            hours = math.floor(diff.seconds/3600)
-            if hours == 1:
-                return str() + ' about an hour ago'
-            else:
-                return str(hours) + ' hours ago'
-        
-        #days
-        if diff.days >= 1 and diff.days < 7:
-            days = diff.days
-            if days == 1:
-                return str() + ' Yesterday'
-            else:
-                return str(days) + ' days ago'
-        #WEEKS
-        if diff.days >= 7 and diff.days < 30:
-            weeks = math.floor(diff.days/7)
-            if weeks == 1:
-                return str() + ' about a week ago'
-            else:
-                return str(weeks) + ' weeks ago'
-
-        #months
-        if diff.days >= 30 and diff.days < 365:
-            months = math.floor(diff.days/30)
-            if months == 1:
-                return str() + ' about a month ago'
-            else:
-                return str(months) + ' months ago'
-
-        #years
-        if diff.days >= 365:
-            years = math.floor(diff.days/365)
-            if years == 1:
-                return str() + ' about a year ago'
-            else:
-                return str(years) + ' years ago'
 
 
 class Comment(models.Model):
@@ -110,7 +74,7 @@ class Comment(models.Model):
     email = models.EmailField()
     parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
     body = models.TextField()
-    posted = models.DateTimeField(default=timezone.now)
+    post_date = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=False)
@@ -126,7 +90,7 @@ class Comment(models.Model):
     
     def whenposted(self):
         now = timezone.now()
-        diff = now - self.posted
+        diff = now - self.post_date
         #seconds
         if diff.days == 0 and diff.seconds >= 0 and diff.seconds < 60:
             seconds = diff.seconds
@@ -186,6 +150,6 @@ class Comment(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)
 #     created_at = models.DateTimeField(auto_now_add=True)
 
-class Review(models.Model):
-    post = models.ForeignKey('Post',on_delete=models.CASCADE)
+# class Review(models.Model):
+#     post = models.ForeignKey('Post',on_delete=models.CASCADE)
     
