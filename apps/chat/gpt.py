@@ -1,10 +1,11 @@
 import os
 import sys
+from dotenv import load_dotenv
 import openai
+load_dotenv('./.env')
 import textwrap
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
-
+openai.api_key = os.environ['OPENAI_API_KEY']
 MODEL = "gpt-3.5-turbo"
 
 messages = [{"role": "system", "content": "You are a friendly and helpful assistant."}]

@@ -11,6 +11,7 @@ class ProfileInline(admin.StackedInline):
     verbose_name_plural = 'Profile'
     fk_name = 'user'
     view_on_site = False
+
 class CustomUserAdmin(UserAdmin):
     inlines = (ProfileInline, )
     list_display = ('username', 'first_name','last_name' ,'is_staff','email')

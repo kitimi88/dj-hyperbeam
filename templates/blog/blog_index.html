@@ -6,9 +6,9 @@
 {% load humanize %}
 {% block title %}Blog{% endblock title %}
 {% block content %}
-<div class="album py-3">
-    <div class="container">
-        <h1>Blog</h1>
+
+    <div class="container px-3">
+        <h1>| Blog</h1>
 
         {% if tag %}
         <p class="lead">Articles tagged with {{ tag.name }}</p>
@@ -18,32 +18,27 @@
             {% for post in posts %}
 
             <div class="col-md-4 mb-3">
-                <div class="card shadow border-0">
-                    <div class="card h-100 border-0">
-
-                        <img class="cbd-placeholder-img card-img-top" src="{{ post.image.url }}" width="600" height="300" alt="">
-
+                <div class="card h-100 shadow border-0">
+                  
+                  <img src="{{ post.image.url }}" alt="" width="600" height="300" class="card-img-top">
+                  <div class="card-body">
+                    <h4 class="card-title mb-3 fw-normal text-dark">{{post.title}}</h4>
+                    <p class="text-dark">{{ post.content|safe|striptags|truncatechars:100}}</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a href="{{post.get_absolute_url}}" class="text-decoration-none stretched-link">
+                          Read article
+                        </a>
+                         
+                      </div>
+                      <small class="text-muted">{{post.content|readtime}}</small>
                     </div>
-
-                    <div class="card-body">
-                        <h4 class="card-title text-dark">{{ post.title }}</h4>
-
-                        <div class="mb-3">
-                            <p>
-                                <span class="text-dark">{{ post.author.first_name }} {{ post.author.last_name}}</span>
-                                <small class="text-muted"><i class="bi bi-dot"></i>{{ post.pub_date|time_ago }}</small>
-                            </p>
-                            <p class="card-text text-dark mb-3">
-                                {{ post.content|safe|striptags|truncatechars:100 }}
-                                <a href="{{post.get_absolute_url}}"
-                                    class="text-decoration-none stretched-link">Read article</a>
-
-                            </p>
-                        </div>
-                    </div>
+                  </div>
+                
                 </div>
-            </div>
-
+                
+              </div>
             {% endfor %}
         </div>
     </div>

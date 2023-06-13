@@ -1,5 +1,6 @@
 from django.contrib import admin
 from apps.blog.models import Post, Comment
+from django.contrib.auth.models import Group
 
 @admin.action(description="Mark selected stories as published")
 def make_published(modeladmin, request, queryset):
@@ -8,7 +9,7 @@ def make_published(modeladmin, request, queryset):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'pub_date', 'status','tag_list')
-    list_filter = ('status', 'created', 'pub_date',  'author',)
+    list_filter = ('status', 'created', 'pub_date',)
     search_fields = ('title', 'content')
     prepopulated_fields = {'slug': ('title',)}
     # raw_id_fields = ("author",)
@@ -23,8 +24,6 @@ class PostAdmin(admin.ModelAdmin):
     def tag_list(self, obj):
         return u", ".join(o.name for o in obj.tags.all())
 
-
-
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display=('name', 'email', 'post', 'created', 'active')
@@ -35,3 +34,6 @@ class CommentAdmin(admin.ModelAdmin):
     def approve_comments(self, request, queryset):
         queryset.update(active=True)
 
+
+
+# admin.site.unregister(Group)

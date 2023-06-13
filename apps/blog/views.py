@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from apps.blog.models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
-from .forms import CommentForm
+from apps.blog.forms import CommentForm
 from taggit.models import Tag
 from django.db.models import Count
 from django.db.models import Q
@@ -66,6 +66,7 @@ def post_detail(request, post):
     post = get_object_or_404(Post,slug=post,status='p')
 
     comments = post.comments.filter(active=True).order_by('-updated')
+    #comments = post.comments.filter(active=True)
     new_comment = None
 
     if request.method == 'POST':

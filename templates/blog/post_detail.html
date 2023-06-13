@@ -41,7 +41,7 @@
                         <p class="lead">{{ post.content | safe }}</p>
                         <hr>
 
-                        <div class="fs-6"><small><strong>Published:</strong><i class="bi bi-dot"></i> {{post.whenpublished}} </small></div>
+                        <div class="fs-6"><small><strong>Published: &nbsp;</strong>{{post.pub_date|time_ago}} </small></div>
 
 
                     </section>

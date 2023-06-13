@@ -25,13 +25,7 @@
                 </div>
             </div>
         </div>
-        <form action="{{ post.get_absolute_url }}" method="POST">
-            
-            {% csrf_token %}
 
-            {% bootstrap_form form %}
-
-        </form>
         {% empty %}
         Be the first to comment this article.
         {% endfor %}

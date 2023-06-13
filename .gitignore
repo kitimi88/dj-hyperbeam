@@ -164,5 +164,6 @@ vendor
 migrations
 dummies
 blog_uploads
+profile_uploads
 default_avatar.png
 default_post.png
