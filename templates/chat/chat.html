@@ -1,59 +1,74 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% load django_bootstrap5 %}
-
 {% load crispy_forms_tags %}
 {% load humanize %}
 {% block title %}Chat{% endblock title %}
 {% block content %}
-<div class="container-lg">
-    <h2 class="fw-bold">Django & ChatGPT</h2>
-    <hr class="featurette-divider">
 
-    <div class="row g-3 mt-3">
-        <div class="col-md-10">
-
-            <div id="chat-container">
-
-                <div class="alert alert-primary border-0 mb-3">
-                    <div id="chat-messages"></div>
-                </div>
-
-                <form class="w-100 me-3" id="chat-form" method="POST">
-                    {% csrf_token %}
-                    <div class="col-auto">
-                    <div class="input-group">
-                        <input class="form-control form-control-md" placeholder="Message" id="chat-input" aria-label="chat">
-                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-send-fill"></i></button>
-                    </div>
-            
-                    </div>
-
-                  </form>
+<section>
+  <div class="container px-3 mb-5">
+    <div class="row gx-5">
+      <div class="col-lg-3">
+        <div class="d-flex align-items-center mt-3 mb-3">
+          <img src="{% static 'assets/openai_icon_p.png' %}" class="rounded-circle" alt="" height="50" width="50">
+          <div class="ms-2">
+            <div class="fw-bold">
+              Chatbot
             </div>
+            <div class="fs-6"><small>gpt-turbo-3.5</small></div>
+          </div>
         </div>
+      </div>
+      <div class="col-lg-8">
+        <article>
+          <header class="mb-3">
+            <span class="fs-3 fw-normal mb-0">
+              <a href="{% url 'chat:chat' %}" class="btn btn-success" tabindex="-1" role="button">New session</a>
+            </span>
+          </header>
+          <section class="mb-3" id="chat-container">
+<!-- Chat messages/sessions -->
+            <p class="lead">
+              <div id="chat-messages" class="alert alert-primary border-0"></div>
+            </p>
+
+            <form action="" method="POST" id="chat-form" enctype="multipart/form-data" autocomplete="off">
+              {% csrf_token %}
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Your message" id="chat-input" aria-label="chat">
+
+                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-send-fill"></i></button>
+              </div>
+            </form>
+          </section>
+        </article>
+      </div>
     </div>
-</div>
+  </div>
+</section>
 
 {% block javascripts %}
+
 <script>
-    $(document).ready(function () {
-        $('#chat-form').submit(function (event) {
-            event.preventDefault();
-            var input = $('#chat-input').val();
-            $.ajax({
-                url: '/chat/',
-                type: 'POST',
-                data: { input: input },
-                success: function (response) {
-                    var message = '<p><strong>You:</strong> ' + ' ' + input + '</p>';
-                    message += '<p><strong>ChatGPT:</strong> ' + ' ' + response.response + '</p>';
-                    $('#chat-messages').append(message);
-                    $('#chat-input').val('');
-                }
-            });
-        });
+  $(document).ready(function () {
+    $('#chat-form').submit(function (event) {
+      event.preventDefault();
+      var input = $('#chat-input').val();
+      $.ajax({
+        url: '/chat/',
+        type: 'POST',
+        data: { input: input },
+        success: function (response) {
+
+          var message = '<p><strong><img src="/media/default_avatar.png" class="rounded-circle" height="32" width="32"/></strong> ' + ' ' + input + '</p>';
+          message += '<p><strong><img src="/static/assets/openai_logo_green.png" class="rounded-circle" height="32" width="32"/>ChatGPT</strong>  ' + ' ' + response.response + '</p>';
+          $('#chat-messages').append(message);
+          $('#chat-input').val('');
+        }
+      });
     });
+  });
 </script>
 {% endblock javascripts %}
 {% endblock content %}
